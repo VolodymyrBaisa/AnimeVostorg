@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/splashScreenPart1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/splash_screen_title_piece_1"
+            android:textColor="@color/colorOrange"
+            android:textSize="@dimen/splash_screen_logo_size"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/splashScreenPart2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/splash_screen_title_piece_2"
+            android:textColor="@color/colorLightBlue"
+            android:textSize="@dimen/splash_screen_logo_size"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/splashScreenPart3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@string/splash_screen_title_piece_3"
+            android:textColor="@color/colorBlackDarkBlue"
+            android:textSize="@dimen/splash_screen_logo_size"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/splashScreenVersion"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="top"
+            android:textColor="@color/colorLightGrayBlue"
+            android:textSize="@dimen/splash_screen_logo_version_size"
+            android:textStyle="bold" />
+
+        <ProgressBar
+            android:id="@+id/splashScreenLoading"
+            android:layout_width="@dimen/splash_screen_loading_version_size"
+            android:layout_height="@dimen/splash_screen_loading_version_size"
+            android:gravity="top" />
+    </LinearLayout>
+</RelativeLayout>

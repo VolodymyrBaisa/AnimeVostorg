@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">AnimeVostorg</string>
+
+    <string name="splash_screen_title_piece_1">Anime</string>
+    <string name="splash_screen_title_piece_2">Vostorg</string>
+    <string name="splash_screen_title_piece_3">App</string>
+
+    <string name="internet_connection_error">Не удалось подключиться к Интернету.</string>
+    <string name="connection_error">Oшибка подключения.</string>
+</resources>
