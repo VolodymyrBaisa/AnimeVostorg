@@ -1,10 +1,11 @@
 package usa.bios.animevostorg.ui.activities;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
@@ -14,13 +15,18 @@ import usa.bios.animevostorg.helpers.TypefaceHelper;
 import usa.bios.animevostorg.presenters.IContentPresenter;
 import usa.bios.animevostorg.presenters.IContentView;
 import usa.bios.animevostorg.presenters.impl.ContentPresenter;
+import usa.bios.animevostorg.ui.adapters.ContentRecyclerAdapter;
 
 /**
  * Created by Bios on 8/9/2017.
  */
 
 public class ContentActivity extends AppCompatActivity implements IContentView {
-    IContentPresenter contentPresenter;
+    private IContentPresenter contentPresenter;
+
+    private Toolbar toolbar;
+    private TextView toolbarLabel;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,18 +38,25 @@ public class ContentActivity extends AppCompatActivity implements IContentView {
     private void init() {
         contentPresenter = new ContentPresenter();
 
+        toolbar = (Toolbar) findViewById(R.id.toolbarLayout);
+        toolbarLabel = (TextView) findViewById(R.id.toolbarLabel);
+        recyclerView = (RecyclerView) findViewById(R.id.contentRecyclerContainer);
+    }
+
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+
         setToolbar();
+        setRecyclerView();
     }
 
     private void setToolbar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarLayout);
-        if(!NullHelper.isNull(toolbar)) {
+        if (!NullHelper.isNull(toolbar)) {
             setSupportActionBar(toolbar);
         }
 
-        TextView toolbarLabel = (TextView) findViewById(R.id.toolbarLabel);
-
-        if(!NullHelper.isNull(toolbarLabel)) {
+        if (!NullHelper.isNull(toolbarLabel)) {
             toolbarLabel.setText(R.string.app_name);
             String font = "fonts/roomfer.ttf";
             toolbarLabel.setTypeface(TypefaceHelper.font(this, font));
@@ -53,6 +66,14 @@ public class ContentActivity extends AppCompatActivity implements IContentView {
         if (!NullHelper.isNull(actionBar)) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowTitleEnabled(false);
+        }
+    }
+
+    private void setRecyclerView() {
+        if (!NullHelper.isNull(recyclerView)) {
+            recyclerView.setHasFixedSize(true);
+            recyclerView.setAdapter(new ContentRecyclerAdapter());
+            recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
         }
     }
 

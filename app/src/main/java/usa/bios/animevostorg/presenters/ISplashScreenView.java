@@ -11,7 +11,8 @@ import java.io.File;
 public interface ISplashScreenView extends IBaseView {
     void loadVersion(String version);
     void loadingBar(boolean isLoading);
-    void startPage();
+    void loadPage();
+    void loadContentPage();
     void showError(@StringRes int error);
     File getCacheDir();
 }

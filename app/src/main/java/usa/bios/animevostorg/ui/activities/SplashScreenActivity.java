@@ -1,5 +1,6 @@
 package usa.bios.animevostorg.ui.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
@@ -11,7 +12,6 @@ import android.widget.Toast;
 
 import java.io.File;
 
-import io.reactivex.Observable;
 import usa.bios.animevostorg.R;
 import usa.bios.animevostorg.helpers.NullHelper;
 import usa.bios.animevostorg.helpers.TypefaceHelper;
@@ -100,8 +100,15 @@ public class SplashScreenActivity extends AppCompatActivity implements ISplashSc
     }
 
     @Override
-    public void startPage() {
-        splashScreenPresenter.loadPage(this);
+    public void loadPage() {
+        splashScreenPresenter.loadPage();
+    }
+
+    @Override
+    public void loadContentPage(){
+        Intent toHomePage = new Intent(this, ContentActivity.class);
+        startActivity(toHomePage);
+        finish();
     }
 
     @Override

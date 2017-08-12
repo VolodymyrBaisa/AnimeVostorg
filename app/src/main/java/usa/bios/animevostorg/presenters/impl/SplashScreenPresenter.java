@@ -1,8 +1,5 @@
 package usa.bios.animevostorg.presenters.impl;
 
-import android.content.Context;
-import android.content.Intent;
-
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 
 import java.lang.ref.WeakReference;
@@ -12,12 +9,12 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import usa.bios.animevostorg.R;
+import usa.bios.animevostorg.helpers.NullHelper;
 import usa.bios.animevostorg.model.pojo.SplashScreen;
 import usa.bios.animevostorg.presenters.IBaseView;
 import usa.bios.animevostorg.presenters.ISplashScreenPresenter;
 import usa.bios.animevostorg.presenters.ISplashScreenView;
 import usa.bios.animevostorg.service.APIService;
-import usa.bios.animevostorg.ui.activities.ContentActivity;
 
 /**
  * Created by Bios on 8/2/2017.
@@ -40,7 +37,7 @@ public class SplashScreenPresenter implements ISplashScreenPresenter {
                 splashScreen -> {
                     splashScreenView.loadVersion(splashScreen.getVersion());
                     splashScreenView.loadingBar(false);
-                    splashScreenView.startPage();
+                    splashScreenView.loadPage();
                 },
                 error -> {
                     if (error instanceof HttpException) {
@@ -50,16 +47,18 @@ public class SplashScreenPresenter implements ISplashScreenPresenter {
                     }
 
                     splashScreenView.loadingBar(true);
-                    splashScreenView.startPage();
+                    splashScreenView.loadPage();
                 });
     }
 
     @Override
-    public void loadPage(Context context) {
+    public void loadPage() {
         Observable.timer(SPLASH_DISPLAY_LENGTH, TimeUnit.MILLISECONDS, Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(aLong -> {
-            Intent toHomePage = new Intent(context, ContentActivity.class);
-            context.startActivity(toHomePage);
+            ISplashScreenView splashScreenView = splashScreenViewWeakReference.get();
+            if (!NullHelper.isNull(splashScreenView)) {
+                splashScreenView.loadContentPage();
+            }
         });
     }
 

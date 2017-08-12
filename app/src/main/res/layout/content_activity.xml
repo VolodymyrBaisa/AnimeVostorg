@@ -11,6 +11,16 @@
         android:id="@+id/toolbarLayout"
         layout="@layout/toolbar_layout" />
 
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/contentSwipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/contentRecyclerContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/main_page_card_item_layout" />
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </RelativeLayout>
