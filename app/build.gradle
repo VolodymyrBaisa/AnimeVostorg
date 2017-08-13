@@ -15,7 +15,7 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -54,4 +54,8 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.+'
     //Exoplayer 2
     compile 'com.google.android.exoplayer:exoplayer:r2.+'
+    //Firebase Crash Reporting
+    compile 'com.google.firebase:firebase-crash:11.+'
 }
+
+apply plugin: 'com.google.gms.google-services'

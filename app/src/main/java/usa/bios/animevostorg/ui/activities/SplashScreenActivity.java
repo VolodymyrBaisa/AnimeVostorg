@@ -56,8 +56,8 @@ public class SplashScreenActivity extends AppCompatActivity implements ISplashSc
     }
 
     private void setTypeface() {
-        if (!NullHelper.isNull(splashScreenPart1) && !NullHelper.isNull(splashScreenPart2)
-                && !NullHelper.isNull(splashScreenPart3) && !NullHelper.isNull(screenVersion)) {
+        if (NullHelper.isNotNull(splashScreenPart1) && NullHelper.isNotNull(splashScreenPart2)
+                && NullHelper.isNotNull(splashScreenPart3) && NullHelper.isNotNull(screenVersion)) {
 
             String font = "fonts/roomfer.ttf";
             splashScreenPart1.setTypeface(TypefaceHelper.font(this, font));
@@ -82,14 +82,14 @@ public class SplashScreenActivity extends AppCompatActivity implements ISplashSc
 
     @Override
     public void loadVersion(String version) {
-        if (!NullHelper.isNull(screenVersion) && !NullHelper.isNull(version)) {
+        if (NullHelper.isNotNull(screenVersion) && NullHelper.isNotNull(version)) {
             screenVersion.setText(version);
         }
     }
 
     @Override
     public void loadingBar(boolean isLoading) {
-        if (!NullHelper.isNull(screenVersion) && !NullHelper.isNull(loading))
+        if (NullHelper.isNotNull(screenVersion) && NullHelper.isNotNull(loading))
             if (isLoading) {
                 loading.setVisibility(View.VISIBLE);
                 screenVersion.setVisibility(View.GONE);

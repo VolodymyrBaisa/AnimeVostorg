@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import usa.bios.animevostorg.R;
+import usa.bios.animevostorg.dao.SplashScreenDao;
 import usa.bios.animevostorg.helpers.NullHelper;
 import usa.bios.animevostorg.helpers.TypefaceHelper;
 import usa.bios.animevostorg.presenters.IContentPresenter;
@@ -32,6 +33,7 @@ public class ContentActivity extends AppCompatActivity implements IContentView {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_activity);
+
         init();
     }
 
@@ -52,25 +54,25 @@ public class ContentActivity extends AppCompatActivity implements IContentView {
     }
 
     private void setToolbar() {
-        if (!NullHelper.isNull(toolbar)) {
+        if (NullHelper.isNotNull(toolbar)) {
             setSupportActionBar(toolbar);
         }
 
-        if (!NullHelper.isNull(toolbarLabel)) {
+        if (NullHelper.isNotNull(toolbarLabel)) {
             toolbarLabel.setText(R.string.app_name);
             String font = "fonts/roomfer.ttf";
             toolbarLabel.setTypeface(TypefaceHelper.font(this, font));
         }
 
         ActionBar actionBar = getSupportActionBar();
-        if (!NullHelper.isNull(actionBar)) {
+        if (NullHelper.isNotNull(actionBar)) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowTitleEnabled(false);
         }
     }
 
     private void setRecyclerView() {
-        if (!NullHelper.isNull(recyclerView)) {
+        if (NullHelper.isNotNull(recyclerView)) {
             recyclerView.setHasFixedSize(true);
             recyclerView.setAdapter(new ContentRecyclerAdapter());
             recyclerView.setLayoutManager(new GridLayoutManager(this, 1));

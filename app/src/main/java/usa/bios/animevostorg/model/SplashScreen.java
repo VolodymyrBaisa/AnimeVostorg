@@ -1,4 +1,4 @@
-package usa.bios.animevostorg.model.realm;
+package usa.bios.animevostorg.model;
 
 import io.realm.RealmObject;
 

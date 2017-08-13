@@ -7,10 +7,11 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import usa.bios.animevostorg.R;
+import usa.bios.animevostorg.dao.SplashScreenDao;
 import usa.bios.animevostorg.helpers.NullHelper;
-import usa.bios.animevostorg.model.pojo.SplashScreen;
 import usa.bios.animevostorg.presenters.IBaseView;
 import usa.bios.animevostorg.presenters.ISplashScreenPresenter;
 import usa.bios.animevostorg.presenters.ISplashScreenView;
@@ -25,30 +26,31 @@ public class SplashScreenPresenter implements ISplashScreenPresenter {
     private final int SPLASH_DISPLAY_LENGTH = 1000;
 
     private WeakReference<ISplashScreenView> splashScreenViewWeakReference;
-    private Observable<SplashScreen> splashScreenObservable;
+    private Disposable splashScreenObservable;
 
     @Override
     public void loadVersion() {
         ISplashScreenView splashScreenView = splashScreenViewWeakReference.get();
 
-        splashScreenObservable = APIService.Factory.create(splashScreenView.getCacheDir(), ENDPOINT).getVersion();
-        splashScreenObservable.subscribeOn(Schedulers.io())
+        splashScreenObservable = APIService.Factory.create(splashScreenView.getCacheDir(), ENDPOINT).getVersion().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(
-                splashScreen -> {
-                    splashScreenView.loadVersion(splashScreen.getVersion());
-                    splashScreenView.loadingBar(false);
-                    splashScreenView.loadPage();
-                },
-                error -> {
-                    if (error instanceof HttpException) {
-                        splashScreenView.showError(R.string.internet_connection_error);
-                    } else {
-                        splashScreenView.showError(R.string.connection_error);
-                    }
+                        splashScreen -> {
+                            new SplashScreenDao().storeOrUpdateSplashScreen(splashScreen);
 
-                    splashScreenView.loadingBar(true);
-                    splashScreenView.loadPage();
-                });
+                            splashScreenView.loadVersion(splashScreen.getVersion());
+                            splashScreenView.loadingBar(false);
+                            splashScreenView.loadPage();
+                        },
+                        error -> {
+                            if (error instanceof HttpException) {
+                                splashScreenView.showError(R.string.internet_connection_error);
+                            } else {
+                                splashScreenView.showError(R.string.connection_error);
+                            }
+
+                            splashScreenView.loadingBar(true);
+                            splashScreenView.loadPage();
+                        });
     }
 
     @Override
@@ -56,7 +58,7 @@ public class SplashScreenPresenter implements ISplashScreenPresenter {
         Observable.timer(SPLASH_DISPLAY_LENGTH, TimeUnit.MILLISECONDS, Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(aLong -> {
             ISplashScreenView splashScreenView = splashScreenViewWeakReference.get();
-            if (!NullHelper.isNull(splashScreenView)) {
+            if (NullHelper.isNotNull(splashScreenView)) {
                 splashScreenView.loadContentPage();
             }
         });
@@ -69,7 +71,9 @@ public class SplashScreenPresenter implements ISplashScreenPresenter {
 
     @Override
     public void unSubscribe() {
-        if (splashScreenViewWeakReference != null) splashScreenViewWeakReference.clear();
-        if (splashScreenObservable != null) splashScreenObservable.unsubscribeOn(Schedulers.io());
+        if (NullHelper.isNotNull(splashScreenViewWeakReference))
+            splashScreenViewWeakReference.clear();
+        if (NullHelper.isNotNull(splashScreenObservable) && !splashScreenObservable.isDisposed())
+            splashScreenObservable.dispose();
     }
 }

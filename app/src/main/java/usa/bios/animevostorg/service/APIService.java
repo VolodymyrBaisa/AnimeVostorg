@@ -12,7 +12,7 @@ import okhttp3.Request;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
-import usa.bios.animevostorg.model.pojo.SplashScreen;
+import usa.bios.animevostorg.model.SplashScreen;
 
 /**
  * Created by Bios on 8/6/2017.

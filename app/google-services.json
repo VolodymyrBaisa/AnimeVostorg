@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "162225081134",
+    "firebase_url": "https://animevostorg-fa460.firebaseio.com",
+    "project_id": "animevostorg-fa460",
+    "storage_bucket": "animevostorg-fa460.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:162225081134:android:42e7192ee409c874",
+        "android_client_info": {
+          "package_name": "usa.bios.animevostorg"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "162225081134-p3b32re59et806ehgje035a0jr4dlgpf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAm8bRLJucUIkWfsePzRxpVObUNUPDeNYg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
