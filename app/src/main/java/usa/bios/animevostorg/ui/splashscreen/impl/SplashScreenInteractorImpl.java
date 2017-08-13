@@ -1,4 +1,4 @@
-package usa.bios.animevostorg.ui.splashscreen;
+package usa.bios.animevostorg.ui.splashscreen.impl;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 
@@ -11,6 +11,9 @@ import io.reactivex.schedulers.Schedulers;
 import usa.bios.animevostorg.R;
 import usa.bios.animevostorg.dao.SplashScreenDao;
 import usa.bios.animevostorg.service.APIService;
+import usa.bios.animevostorg.ui.splashscreen.LoadPageListener;
+import usa.bios.animevostorg.ui.splashscreen.SplashScreenInteractor;
+import usa.bios.animevostorg.ui.splashscreen.SplashScreenView;
 import usa.bios.animevostorg.utils.NullUtils;
 
 /**

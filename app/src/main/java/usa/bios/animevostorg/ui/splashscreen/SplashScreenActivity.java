@@ -13,6 +13,7 @@ import android.widget.Toast;
 import java.io.File;
 
 import usa.bios.animevostorg.R;
+import usa.bios.animevostorg.ui.splashscreen.impl.SplashScreenPresenterImpl;
 import usa.bios.animevostorg.utils.NullUtils;
 import usa.bios.animevostorg.utils.TypefaceUtils;
 import usa.bios.animevostorg.ui.content.ContentActivity;

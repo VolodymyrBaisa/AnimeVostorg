@@ -1,9 +1,13 @@
-package usa.bios.animevostorg.ui.splashscreen;
+package usa.bios.animevostorg.ui.splashscreen.impl;
 
 import java.lang.ref.WeakReference;
 
 import io.reactivex.disposables.Disposable;
 import usa.bios.animevostorg.BaseView;
+import usa.bios.animevostorg.ui.splashscreen.LoadPageListener;
+import usa.bios.animevostorg.ui.splashscreen.SplashScreenInteractor;
+import usa.bios.animevostorg.ui.splashscreen.SplashScreenPresenter;
+import usa.bios.animevostorg.ui.splashscreen.SplashScreenView;
 import usa.bios.animevostorg.utils.NullUtils;
 
 /**
@@ -14,7 +18,7 @@ public class SplashScreenPresenterImpl implements SplashScreenPresenter, LoadPag
 
 
     private WeakReference<SplashScreenView> splashScreenViewWeakReference;
-    private SplashScreenInteractor  splashScreenInteractor;
+    private SplashScreenInteractor splashScreenInteractor;
     private Disposable loadVersionDisposable;
     private Disposable loadPageDisposable;
 

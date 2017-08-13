@@ -1,8 +1,11 @@
-package usa.bios.animevostorg.ui.content;
+package usa.bios.animevostorg.ui.content.impl;
 
 import java.lang.ref.WeakReference;
 
 import usa.bios.animevostorg.BaseView;
+import usa.bios.animevostorg.ui.content.ContentInteractor;
+import usa.bios.animevostorg.ui.content.ContentPresenter;
+import usa.bios.animevostorg.ui.content.ContentView;
 import usa.bios.animevostorg.utils.NullUtils;
 
 /**

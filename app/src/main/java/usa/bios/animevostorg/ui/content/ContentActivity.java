@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import usa.bios.animevostorg.R;
+import usa.bios.animevostorg.ui.content.impl.ContentPresenterImpl;
 import usa.bios.animevostorg.utils.NullUtils;
 import usa.bios.animevostorg.utils.TypefaceUtils;
 
