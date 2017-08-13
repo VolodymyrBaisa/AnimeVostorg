@@ -21,6 +21,12 @@ public class SplashScreenInteractorImpl implements SplashScreenInteractor {
     private static final String ENDPOINT = "http://animevost-app.ru";
     private final int SPLASH_DISPLAY_LENGTH = 1000;
 
+    private LoadPageListener loadPageListener;
+
+    public SplashScreenInteractorImpl(LoadPageListener loadPageListener) {
+        this.loadPageListener = loadPageListener;
+    }
+
     @Override
     public Disposable loadVersion(SplashScreenView splashScreenView) {
 
@@ -31,6 +37,7 @@ public class SplashScreenInteractorImpl implements SplashScreenInteractor {
 
                             splashScreenView.setVersion(splashScreen.getVersion());
                             splashScreenView.setLoadingBar(false);
+                            loadPageListener.load();
                         },
                         error -> {
                             if (error instanceof HttpException) {
@@ -40,6 +47,7 @@ public class SplashScreenInteractorImpl implements SplashScreenInteractor {
                             }
 
                             splashScreenView.setLoadingBar(true);
+                            loadPageListener.load();
                         });
     }
 

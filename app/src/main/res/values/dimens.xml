@@ -3,4 +3,11 @@
     <dimen name="splash_screen_logo_size">40sp</dimen>
     <dimen name="splash_screen_logo_version_size">20sp</dimen>
     <dimen name="splash_screen_loading_version_size">20dp</dimen>
+
+    <dimen name="content_card_width">350dp</dimen>
+    <dimen name="content_card_height">500dp</dimen>
+    <dimen name="content_card_corner_radius">5dp</dimen>
+    <dimen name="content_card_elevation">5dp</dimen>
+    <dimen name="content_card_title_text_size">40sp</dimen>
+    <dimen name="content_card_view_text_size">21sp</dimen>
 </resources>

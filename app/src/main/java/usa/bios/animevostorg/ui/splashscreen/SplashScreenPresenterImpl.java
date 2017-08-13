@@ -10,18 +10,18 @@ import usa.bios.animevostorg.utils.NullUtils;
  * Created by Bios on 8/2/2017.
  */
 
-public class SplashScreenPresenterImpl implements SplashScreenPresenter {
+public class SplashScreenPresenterImpl implements SplashScreenPresenter, LoadPageListener {
 
 
     private WeakReference<SplashScreenView> splashScreenViewWeakReference;
-    private SplashScreenInteractor splashScreenInteractor;
+    private SplashScreenInteractor  splashScreenInteractor;
     private Disposable loadVersionDisposable;
     private Disposable loadPageDisposable;
 
     @Override
     public void subscribe(BaseView baseView) {
         splashScreenViewWeakReference = new WeakReference<>((SplashScreenView) baseView);
-        splashScreenInteractor = new SplashScreenInteractorImpl();
+        splashScreenInteractor = new SplashScreenInteractorImpl(this);
     }
 
     @Override
@@ -35,6 +35,11 @@ public class SplashScreenPresenterImpl implements SplashScreenPresenter {
     @Override
     public void launchContentActivity() {
         loadVersionDisposable = splashScreenInteractor.loadVersion(splashScreenViewWeakReference.get());
+
+    }
+
+    @Override
+    public void load() {
         loadPageDisposable = splashScreenInteractor.loadPage(splashScreenViewWeakReference.get());
     }
 }
