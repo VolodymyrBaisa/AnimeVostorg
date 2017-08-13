@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
     android:orientation="vertical"
-    tools:context=".ui.activities.ContentActivity">
+    tools:context=".ui.content.ContentActivity">
 
     <include
         android:id="@+id/toolbarLayout"

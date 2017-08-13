@@ -1,4 +1,4 @@
-package usa.bios.animevostorg.ui.activities;
+package usa.bios.animevostorg.ui.content;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,20 +10,15 @@ import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import usa.bios.animevostorg.R;
-import usa.bios.animevostorg.dao.SplashScreenDao;
-import usa.bios.animevostorg.helpers.NullHelper;
-import usa.bios.animevostorg.helpers.TypefaceHelper;
-import usa.bios.animevostorg.presenters.IContentPresenter;
-import usa.bios.animevostorg.presenters.IContentView;
-import usa.bios.animevostorg.presenters.impl.ContentPresenter;
-import usa.bios.animevostorg.ui.adapters.ContentRecyclerAdapter;
+import usa.bios.animevostorg.utils.NullUtils;
+import usa.bios.animevostorg.utils.TypefaceUtils;
 
 /**
  * Created by Bios on 8/9/2017.
  */
 
-public class ContentActivity extends AppCompatActivity implements IContentView {
-    private IContentPresenter contentPresenter;
+public class ContentActivity extends AppCompatActivity implements ContentView {
+    private ContentPresenter contentPresenter;
 
     private Toolbar toolbar;
     private TextView toolbarLabel;
@@ -38,7 +33,7 @@ public class ContentActivity extends AppCompatActivity implements IContentView {
     }
 
     private void init() {
-        contentPresenter = new ContentPresenter();
+        contentPresenter = new ContentPresenterImpl();
 
         toolbar = (Toolbar) findViewById(R.id.toolbarLayout);
         toolbarLabel = (TextView) findViewById(R.id.toolbarLabel);
@@ -54,25 +49,25 @@ public class ContentActivity extends AppCompatActivity implements IContentView {
     }
 
     private void setToolbar() {
-        if (NullHelper.isNotNull(toolbar)) {
+        if (NullUtils.isNotNull(toolbar)) {
             setSupportActionBar(toolbar);
         }
 
-        if (NullHelper.isNotNull(toolbarLabel)) {
+        if (NullUtils.isNotNull(toolbarLabel)) {
             toolbarLabel.setText(R.string.app_name);
             String font = "fonts/roomfer.ttf";
-            toolbarLabel.setTypeface(TypefaceHelper.font(this, font));
+            toolbarLabel.setTypeface(TypefaceUtils.font(this, font));
         }
 
         ActionBar actionBar = getSupportActionBar();
-        if (NullHelper.isNotNull(actionBar)) {
+        if (NullUtils.isNotNull(actionBar)) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowTitleEnabled(false);
         }
     }
 
     private void setRecyclerView() {
-        if (NullHelper.isNotNull(recyclerView)) {
+        if (NullUtils.isNotNull(recyclerView)) {
             recyclerView.setHasFixedSize(true);
             recyclerView.setAdapter(new ContentRecyclerAdapter());
             recyclerView.setLayoutManager(new GridLayoutManager(this, 1));

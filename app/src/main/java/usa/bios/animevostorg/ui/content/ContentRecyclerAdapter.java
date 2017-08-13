@@ -1,4 +1,4 @@
-package usa.bios.animevostorg.ui.adapters;
+package usa.bios.animevostorg.ui.content;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;

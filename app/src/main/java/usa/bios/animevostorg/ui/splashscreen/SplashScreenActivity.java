@@ -1,4 +1,4 @@
-package usa.bios.animevostorg.ui.activities;
+package usa.bios.animevostorg.ui.splashscreen;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,18 +13,16 @@ import android.widget.Toast;
 import java.io.File;
 
 import usa.bios.animevostorg.R;
-import usa.bios.animevostorg.helpers.NullHelper;
-import usa.bios.animevostorg.helpers.TypefaceHelper;
-import usa.bios.animevostorg.presenters.ISplashScreenPresenter;
-import usa.bios.animevostorg.presenters.ISplashScreenView;
-import usa.bios.animevostorg.presenters.impl.SplashScreenPresenter;
+import usa.bios.animevostorg.utils.NullUtils;
+import usa.bios.animevostorg.utils.TypefaceUtils;
+import usa.bios.animevostorg.ui.content.ContentActivity;
 
 /**
  * Created by Bios on 8/2/2017.
  */
 
-public class SplashScreenActivity extends AppCompatActivity implements ISplashScreenView {
-    private ISplashScreenPresenter splashScreenPresenter;
+public class SplashScreenActivity extends AppCompatActivity implements SplashScreenView {
+    private SplashScreenPresenter splashScreenPresenter;
     private TextView splashScreenPart1;
     private TextView splashScreenPart2;
     private TextView splashScreenPart3;
@@ -39,7 +37,7 @@ public class SplashScreenActivity extends AppCompatActivity implements ISplashSc
     }
 
     private void init() {
-        splashScreenPresenter = new SplashScreenPresenter();
+        splashScreenPresenter = new SplashScreenPresenterImpl();
 
         splashScreenPart1 = (TextView) findViewById(R.id.splashScreenPart1);
         splashScreenPart2 = (TextView) findViewById(R.id.splashScreenPart2);
@@ -56,14 +54,14 @@ public class SplashScreenActivity extends AppCompatActivity implements ISplashSc
     }
 
     private void setTypeface() {
-        if (NullHelper.isNotNull(splashScreenPart1) && NullHelper.isNotNull(splashScreenPart2)
-                && NullHelper.isNotNull(splashScreenPart3) && NullHelper.isNotNull(screenVersion)) {
+        if (NullUtils.isNotNull(splashScreenPart1) && NullUtils.isNotNull(splashScreenPart2)
+                && NullUtils.isNotNull(splashScreenPart3) && NullUtils.isNotNull(screenVersion)) {
 
             String font = "fonts/roomfer.ttf";
-            splashScreenPart1.setTypeface(TypefaceHelper.font(this, font));
-            splashScreenPart2.setTypeface(TypefaceHelper.font(this, font));
-            splashScreenPart3.setTypeface(TypefaceHelper.font(this, font));
-            screenVersion.setTypeface(TypefaceHelper.font(this, font));
+            splashScreenPart1.setTypeface(TypefaceUtils.font(this, font));
+            splashScreenPart2.setTypeface(TypefaceUtils.font(this, font));
+            splashScreenPart3.setTypeface(TypefaceUtils.font(this, font));
+            screenVersion.setTypeface(TypefaceUtils.font(this, font));
         }
     }
 
@@ -71,7 +69,7 @@ public class SplashScreenActivity extends AppCompatActivity implements ISplashSc
     protected void onStart() {
         super.onStart();
         splashScreenPresenter.subscribe(this);
-        splashScreenPresenter.loadVersion();
+        splashScreenPresenter.launchContentActivity();
     }
 
     @Override
@@ -81,15 +79,15 @@ public class SplashScreenActivity extends AppCompatActivity implements ISplashSc
     }
 
     @Override
-    public void loadVersion(String version) {
-        if (NullHelper.isNotNull(screenVersion) && NullHelper.isNotNull(version)) {
+    public void setVersion(String version) {
+        if (NullUtils.isNotNull(screenVersion) && NullUtils.isNotNull(version)) {
             screenVersion.setText(version);
         }
     }
 
     @Override
-    public void loadingBar(boolean isLoading) {
-        if (NullHelper.isNotNull(screenVersion) && NullHelper.isNotNull(loading))
+    public void setLoadingBar(boolean isLoading) {
+        if (NullUtils.isNotNull(screenVersion) && NullUtils.isNotNull(loading))
             if (isLoading) {
                 loading.setVisibility(View.VISIBLE);
                 screenVersion.setVisibility(View.GONE);
@@ -97,11 +95,6 @@ public class SplashScreenActivity extends AppCompatActivity implements ISplashSc
                 loading.setVisibility(View.GONE);
                 screenVersion.setVisibility(View.VISIBLE);
             }
-    }
-
-    @Override
-    public void loadPage() {
-        splashScreenPresenter.loadPage();
     }
 
     @Override

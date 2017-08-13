@@ -1,11 +1,11 @@
-package usa.bios.animevostorg.helpers;
+package usa.bios.animevostorg.utils;
 
 /**
  * Created by Bios on 8/8/2017.
  */
 
-public class NullHelper {
-    private NullHelper() {
+public class NullUtils {
+    private NullUtils() {
         throw new IllegalAccessError("Utility class");
     }
 

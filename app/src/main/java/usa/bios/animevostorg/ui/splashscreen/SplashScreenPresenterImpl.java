@@ -1,0 +1,40 @@
+package usa.bios.animevostorg.ui.splashscreen;
+
+import java.lang.ref.WeakReference;
+
+import io.reactivex.disposables.Disposable;
+import usa.bios.animevostorg.BaseView;
+import usa.bios.animevostorg.utils.NullUtils;
+
+/**
+ * Created by Bios on 8/2/2017.
+ */
+
+public class SplashScreenPresenterImpl implements SplashScreenPresenter {
+
+
+    private WeakReference<SplashScreenView> splashScreenViewWeakReference;
+    private SplashScreenInteractor splashScreenInteractor;
+    private Disposable loadVersionDisposable;
+    private Disposable loadPageDisposable;
+
+    @Override
+    public void subscribe(BaseView baseView) {
+        splashScreenViewWeakReference = new WeakReference<>((SplashScreenView) baseView);
+        splashScreenInteractor = new SplashScreenInteractorImpl();
+    }
+
+    @Override
+    public void unSubscribe() {
+        if (NullUtils.isNotNull(splashScreenViewWeakReference)) splashScreenViewWeakReference.clear();
+        if(NullUtils.isNotNull(splashScreenInteractor)) splashScreenInteractor = null;
+        if (NullUtils.isNotNull(loadVersionDisposable) && !loadVersionDisposable.isDisposed()) loadVersionDisposable.dispose();
+        if (NullUtils.isNotNull(loadPageDisposable) && !loadPageDisposable.isDisposed()) loadPageDisposable.dispose();
+    }
+
+    @Override
+    public void launchContentActivity() {
+        loadVersionDisposable = splashScreenInteractor.loadVersion(splashScreenViewWeakReference.get());
+        loadPageDisposable = splashScreenInteractor.loadPage(splashScreenViewWeakReference.get());
+    }
+}

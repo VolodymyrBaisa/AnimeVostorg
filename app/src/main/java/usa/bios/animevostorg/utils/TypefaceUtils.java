@@ -1,4 +1,4 @@
-package usa.bios.animevostorg.helpers;
+package usa.bios.animevostorg.utils;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -7,8 +7,8 @@ import android.graphics.Typeface;
  * Created by Bios on 8/9/2017.
  */
 
-public class TypefaceHelper {
-    private TypefaceHelper() {
+public class TypefaceUtils {
+    private TypefaceUtils() {
         throw new IllegalAccessError("Utility class");
     }
 
