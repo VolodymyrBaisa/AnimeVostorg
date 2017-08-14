@@ -15,4 +15,20 @@
         <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
         <item name="android:background">@color/colorPrimary</item>
     </style>
+
+    <style name="HorizontalScrollStyle">
+        <item name="android:scrollbars">none</item>
+        <item name="android:scrollbarSize">0dp</item>
+    </style>
+
+    <style name="TextAppearanceStyle">
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+    </style>
+
+    <style name="RatingBarStyle" parent="@android:style/Widget.RatingBar">
+        <item name="android:minHeight">16dip</item>
+        <item name="android:maxHeight">16dip</item>
+        <item name="android:progressDrawable">@drawable/ratingbar</item>
+        <item name="android:isIndicator">true</item>
+    </style>
 </resources>

@@ -14,6 +14,6 @@ public interface SplashScreenView extends BaseView {
     void setVersion(String version);
     void setLoadingBar(boolean isLoading);
     void loadContentPage();
-    void showError(@StringRes int error);
+    void showError(@StringRes int errorResId);
     File getCacheDir();
 }

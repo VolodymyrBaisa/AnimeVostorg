@@ -13,16 +13,18 @@ import android.widget.Toast;
 import java.io.File;
 
 import usa.bios.animevostorg.R;
+import usa.bios.animevostorg.ui.contentscreen.ContentScreenScreenActivity;
 import usa.bios.animevostorg.ui.splashscreen.impl.SplashScreenPresenterImpl;
 import usa.bios.animevostorg.utils.NullUtils;
 import usa.bios.animevostorg.utils.TypefaceUtils;
-import usa.bios.animevostorg.ui.content.ContentActivity;
 
 /**
  * Created by Bios on 8/2/2017.
  */
 
 public class SplashScreenActivity extends AppCompatActivity implements SplashScreenView {
+    private static final String FONT = "fonts/roomfer.ttf";
+
     private SplashScreenPresenter splashScreenPresenter;
     private TextView splashScreenPart1;
     private TextView splashScreenPart2;
@@ -33,7 +35,7 @@ public class SplashScreenActivity extends AppCompatActivity implements SplashScr
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.splash_screen_activity);
+        setContentView(R.layout.activity_splash_screen);
         init();
     }
 
@@ -58,11 +60,10 @@ public class SplashScreenActivity extends AppCompatActivity implements SplashScr
         if (NullUtils.isNotNull(splashScreenPart1) && NullUtils.isNotNull(splashScreenPart2)
                 && NullUtils.isNotNull(splashScreenPart3) && NullUtils.isNotNull(screenVersion)) {
 
-            String font = "fonts/roomfer.ttf";
-            splashScreenPart1.setTypeface(TypefaceUtils.font(this, font));
-            splashScreenPart2.setTypeface(TypefaceUtils.font(this, font));
-            splashScreenPart3.setTypeface(TypefaceUtils.font(this, font));
-            screenVersion.setTypeface(TypefaceUtils.font(this, font));
+            splashScreenPart1.setTypeface(TypefaceUtils.font(this, FONT));
+            splashScreenPart2.setTypeface(TypefaceUtils.font(this, FONT));
+            splashScreenPart3.setTypeface(TypefaceUtils.font(this, FONT));
+            screenVersion.setTypeface(TypefaceUtils.font(this, FONT));
         }
     }
 
@@ -99,8 +100,8 @@ public class SplashScreenActivity extends AppCompatActivity implements SplashScr
     }
 
     @Override
-    public void loadContentPage(){
-        Intent toHomePage = new Intent(this, ContentActivity.class);
+    public void loadContentPage() {
+        Intent toHomePage = new Intent(this, ContentScreenScreenActivity.class);
         startActivity(toHomePage);
         finish();
     }

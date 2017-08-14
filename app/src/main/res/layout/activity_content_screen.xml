@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
     android:orientation="vertical"
-    tools:context=".ui.content.ContentActivity">
+    tools:context=".ui.contentscreen.ContentScreenScreenActivity">
 
     <include
         android:id="@+id/toolbarLayout"
@@ -20,7 +20,7 @@
             android:id="@+id/contentRecyclerContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/content_card_item_layout" />
+            tools:listitem="@layout/content_screen_item_layout" />
     </android.support.v4.widget.SwipeRefreshLayout>
 
 </RelativeLayout>

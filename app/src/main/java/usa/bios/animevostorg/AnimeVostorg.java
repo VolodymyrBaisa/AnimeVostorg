@@ -1,4 +1,4 @@
-package usa.bios.animevostorg.app;
+package usa.bios.animevostorg;
 
 import android.app.Application;
 import android.content.Context;

@@ -7,4 +7,12 @@
 
     <string name="internet_connection_error">Не удалось подключиться к Интернету.</string>
     <string name="connection_error">Oшибка подключения.</string>
+
+    <string name="release_date">Год выхода:</string>
+    <string name="genre">Жанр:</string>
+    <string name="type">Тип:</string>
+    <string name="episodes">Количество серий:</string>
+    <string name="director">Режиссёр:</string>
+    <string name="rating">Рейтинг:</string>
+    <string name="votes">Голосов:</string>
 </resources>
