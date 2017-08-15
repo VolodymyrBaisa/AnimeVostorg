@@ -13,7 +13,7 @@ import android.widget.Toast;
 import java.io.File;
 
 import usa.bios.animevostorg.R;
-import usa.bios.animevostorg.ui.contentscreen.ContentScreenScreenActivity;
+import usa.bios.animevostorg.ui.contentscreen.ContentScreenActivity;
 import usa.bios.animevostorg.ui.splashscreen.impl.SplashScreenPresenterImpl;
 import usa.bios.animevostorg.utils.NullUtils;
 import usa.bios.animevostorg.utils.TypefaceUtils;
@@ -101,7 +101,7 @@ public class SplashScreenActivity extends AppCompatActivity implements SplashScr
 
     @Override
     public void loadContentPage() {
-        Intent toHomePage = new Intent(this, ContentScreenScreenActivity.class);
+        Intent toHomePage = new Intent(this, ContentScreenActivity.class);
         startActivity(toHomePage);
         finish();
     }

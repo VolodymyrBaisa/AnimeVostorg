@@ -18,7 +18,7 @@ import usa.bios.animevostorg.utils.TypefaceUtils;
  * Created by Bios on 8/9/2017.
  */
 
-public class ContentScreenScreenActivity extends AppCompatActivity implements ContentScreenView {
+public class ContentScreenActivity extends AppCompatActivity implements ContentScreenView {
     private static final String FONT = "fonts/roomfer.ttf";
     private ContentScreenPresenter contentScreenPresenter;
 
@@ -76,7 +76,7 @@ public class ContentScreenScreenActivity extends AppCompatActivity implements Co
     private void setRecyclerView() {
         if (NullUtils.isNotNull(recyclerView)) {
             recyclerView.setHasFixedSize(true);
-            recyclerView.setAdapter(new ContentRecyclerAdapter());
+            recyclerView.setAdapter(new ContentScreenRecyclerAdapter(contentScreenPresenter));
             recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
         }
     }

@@ -8,7 +8,7 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.CardView
-        android:id="@+id/contentScreenRoot"
+        android:id="@+id/itemContentRoot"
         android:layout_width="@dimen/content_screen_card_width"
         android:layout_height="@dimen/content_screen_card_height"
         app:cardCornerRadius="@dimen/content_screen_card_corner_radius"
@@ -20,7 +20,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/contentScreenCover"
+                android:id="@+id/itemContentCover"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:ignore="ContentDescription" />
@@ -28,12 +28,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_above="@+id/contentScreenDescriptionPanel"
+                android:layout_above="@+id/itemContentDescriptionPanel"
                 android:gravity="center"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/contentScreenNumberOfSeries"
+                    android:id="@+id/itemContentNumberOfEpisodes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rectangle_radius_shape"
@@ -48,7 +48,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/contentScreenDescriptionPanel"
+                android:id="@+id/itemContentDescriptionPanel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
@@ -56,7 +56,7 @@
                 android:orientation="vertical">
 
                 <HorizontalScrollView
-                    android:id="@+id/contentScreenTitleHorizontalScroll"
+                    android:id="@+id/itemContentTitleHorizontalScroll"
                     style="@style/HorizontalScrollStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
                     android:paddingRight="10dp">
 
                     <TextView
-                        android:id="@+id/contentScreenTitle"
+                        android:id="@+id/itemContentTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center|start"
@@ -82,7 +82,7 @@
                     android:paddingRight="5dp">
 
                     <LinearLayout
-                        android:id="@+id/contentScreenReleaseDateLayout"
+                        android:id="@+id/itemContentReleaseDateLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
@@ -96,13 +96,14 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/contentScreenRelease"
+                            android:id="@+id/itemContentRelease"
                             style="@style/TextAppearanceStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/itemContentGenreLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
@@ -116,10 +117,12 @@
                             android:textStyle="bold" />
 
                         <HorizontalScrollView
+                            android:id="@+id/itemContentGenreHorizontalScroll"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
 
                             <TextView
+                                android:id="@+id/itemContentGenre"
                                 style="@style/TextAppearanceStyle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
@@ -127,6 +130,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/itemContentTypeLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
@@ -140,10 +144,12 @@
                             android:textStyle="bold" />
 
                         <HorizontalScrollView
+                            android:id="@+id/itemContentTypeHorizontalScroll"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
 
                             <TextView
+                                android:id="@+id/itemContentType"
                                 style="@style/TextAppearanceStyle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
@@ -151,6 +157,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/itemContentEpisodesLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
@@ -164,10 +171,12 @@
                             android:textStyle="bold" />
 
                         <HorizontalScrollView
+                            android:id="@+id/itemContentEpisodesHorizontalScroll"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
 
                             <TextView
+                                android:id="@+id/itemContentEpisodes"
                                 style="@style/TextAppearanceStyle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
@@ -175,6 +184,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/itemContentRatingBarLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
@@ -189,6 +199,7 @@
                             android:textStyle="bold" />
 
                         <RatingBar
+                            android:id="@+id/itemContentRatingBar"
                             style="@style/RatingBarStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
