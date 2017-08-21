@@ -6,5 +6,6 @@ package usa.bios.animevostorg;
 
 public interface BasePresenter {
     void subscribe(BaseView baseView);
+
     void unSubscribe();
 }

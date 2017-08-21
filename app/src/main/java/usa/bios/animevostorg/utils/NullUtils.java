@@ -9,10 +9,11 @@ public class NullUtils {
         throw new IllegalAccessError("Utility class");
     }
 
-    public static boolean isNull(Object object){
+    public static boolean isNull(Object object) {
         return object == null;
     }
-    public static boolean isNotNull(Object object){
+
+    public static boolean isNotNull(Object object) {
         return object != null;
     }
 }

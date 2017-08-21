@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,7 +12,8 @@ import java.io.File;
 
 import usa.bios.animevostorg.R;
 import usa.bios.animevostorg.ui.contentscreen.ContentScreenActivity;
-import usa.bios.animevostorg.ui.splashscreen.impl.SplashScreenPresenterImpl;
+import usa.bios.animevostorg.ui.splashscreen.presenter.SplashScreenPresenter;
+import usa.bios.animevostorg.ui.splashscreen.presenter.impl.SplashScreenPresenterImpl;
 import usa.bios.animevostorg.utils.NullUtils;
 import usa.bios.animevostorg.utils.TypefaceUtils;
 
@@ -30,7 +29,6 @@ public class SplashScreenActivity extends AppCompatActivity implements SplashScr
     private TextView splashScreenPart2;
     private TextView splashScreenPart3;
     private TextView screenVersion;
-    private ProgressBar loading;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,8 +44,6 @@ public class SplashScreenActivity extends AppCompatActivity implements SplashScr
         splashScreenPart2 = (TextView) findViewById(R.id.splashScreenPart2);
         splashScreenPart3 = (TextView) findViewById(R.id.splashScreenPart3);
         screenVersion = (TextView) findViewById(R.id.splashScreenVersion);
-
-        loading = (ProgressBar) findViewById(R.id.splashScreenLoading);
     }
 
     @Override
@@ -85,18 +81,6 @@ public class SplashScreenActivity extends AppCompatActivity implements SplashScr
         if (NullUtils.isNotNull(screenVersion) && NullUtils.isNotNull(version)) {
             screenVersion.setText(version);
         }
-    }
-
-    @Override
-    public void setLoadingBar(boolean isLoading) {
-        if (NullUtils.isNotNull(screenVersion) && NullUtils.isNotNull(loading))
-            if (isLoading) {
-                loading.setVisibility(View.VISIBLE);
-                screenVersion.setVisibility(View.GONE);
-            } else {
-                loading.setVisibility(View.GONE);
-                screenVersion.setVisibility(View.VISIBLE);
-            }
     }
 
     @Override

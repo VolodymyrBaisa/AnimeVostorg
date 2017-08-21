@@ -1,4 +1,4 @@
-package usa.bios.animevostorg.ui.splashscreen.impl;
+package usa.bios.animevostorg.ui.splashscreen.presenter.impl;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 
@@ -11,9 +11,9 @@ import io.reactivex.schedulers.Schedulers;
 import usa.bios.animevostorg.R;
 import usa.bios.animevostorg.dao.SplashScreenDao;
 import usa.bios.animevostorg.service.APIService;
-import usa.bios.animevostorg.ui.splashscreen.LoadPageListener;
-import usa.bios.animevostorg.ui.splashscreen.SplashScreenInteractor;
 import usa.bios.animevostorg.ui.splashscreen.SplashScreenView;
+import usa.bios.animevostorg.ui.splashscreen.listener.LauncherActivityListener;
+import usa.bios.animevostorg.ui.splashscreen.presenter.SplashScreenInteractor;
 import usa.bios.animevostorg.utils.NullUtils;
 
 /**
@@ -24,10 +24,10 @@ public class SplashScreenInteractorImpl implements SplashScreenInteractor {
     private static final String ENDPOINT = "http://animevost-app.ru";
     private final int SPLASH_DISPLAY_LENGTH = 1000;
 
-    private LoadPageListener loadPageListener;
+    private LauncherActivityListener launcherActivityListener;
 
-    public SplashScreenInteractorImpl(LoadPageListener loadPageListener) {
-        this.loadPageListener = loadPageListener;
+    public SplashScreenInteractorImpl(LauncherActivityListener launcherActivityListener) {
+        this.launcherActivityListener = launcherActivityListener;
     }
 
     @Override
@@ -37,10 +37,7 @@ public class SplashScreenInteractorImpl implements SplashScreenInteractor {
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(
                         splashScreen -> {
                             new SplashScreenDao().storeOrUpdateSplashScreen(splashScreen);
-
-                            splashScreenView.setVersion(splashScreen.getVersion());
-                            splashScreenView.setLoadingBar(false);
-                            loadPageListener.load();
+                            launcherActivityListener.launchActivity();
                         },
                         error -> {
                             if (error instanceof HttpException) {
@@ -48,19 +45,17 @@ public class SplashScreenInteractorImpl implements SplashScreenInteractor {
                             } else {
                                 splashScreenView.showError(R.string.connection_error);
                             }
-
-                            splashScreenView.setLoadingBar(true);
-                            loadPageListener.load();
+                            launcherActivityListener.launchActivity();
                         });
     }
 
     @Override
     public Disposable loadPage(SplashScreenView splashScreenView) {
-       return Observable.timer(SPLASH_DISPLAY_LENGTH, TimeUnit.MILLISECONDS, Schedulers.io())
+        return Observable.timer(SPLASH_DISPLAY_LENGTH, TimeUnit.MILLISECONDS, Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(aLong -> {
-            if (NullUtils.isNotNull(splashScreenView)) {
-                splashScreenView.loadContentPage();
-            }
-        });
+                    if (NullUtils.isNotNull(splashScreenView)) {
+                        splashScreenView.loadContentPage();
+                    }
+                });
     }
 }

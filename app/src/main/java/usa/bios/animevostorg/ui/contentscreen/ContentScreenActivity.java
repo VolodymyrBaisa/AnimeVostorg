@@ -9,8 +9,12 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
+import java.io.File;
+
 import usa.bios.animevostorg.R;
-import usa.bios.animevostorg.ui.contentscreen.impl.ContentScreenPresenterImpl;
+import usa.bios.animevostorg.ui.contentscreen.adapter.ContentScreenRecyclerAdapter;
+import usa.bios.animevostorg.ui.contentscreen.presenter.ContentScreenPresenter;
+import usa.bios.animevostorg.ui.contentscreen.presenter.impl.ContentScreenPresenterImpl;
 import usa.bios.animevostorg.utils.NullUtils;
 import usa.bios.animevostorg.utils.TypefaceUtils;
 
@@ -85,6 +89,7 @@ public class ContentScreenActivity extends AppCompatActivity implements ContentS
     protected void onStart() {
         super.onStart();
         contentScreenPresenter.subscribe(this);
+        contentScreenPresenter.getData();
     }
 
     @Override
@@ -93,5 +98,8 @@ public class ContentScreenActivity extends AppCompatActivity implements ContentS
         contentScreenPresenter.unSubscribe();
     }
 
-
+    @Override
+    public File getCacheDir() {
+        return getBaseContext().getCacheDir();
+    }
 }

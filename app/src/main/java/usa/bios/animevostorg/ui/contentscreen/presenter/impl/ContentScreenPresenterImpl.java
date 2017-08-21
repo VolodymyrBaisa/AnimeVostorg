@@ -1,11 +1,11 @@
-package usa.bios.animevostorg.ui.contentscreen.impl;
+package usa.bios.animevostorg.ui.contentscreen.presenter.impl;
 
 import java.lang.ref.WeakReference;
 
 import usa.bios.animevostorg.BaseView;
-import usa.bios.animevostorg.ui.contentscreen.ContentScreenInteractor;
-import usa.bios.animevostorg.ui.contentscreen.ContentScreenPresenter;
 import usa.bios.animevostorg.ui.contentscreen.ContentScreenView;
+import usa.bios.animevostorg.ui.contentscreen.presenter.ContentScreenInteractor;
+import usa.bios.animevostorg.ui.contentscreen.presenter.ContentScreenPresenter;
 import usa.bios.animevostorg.utils.NullUtils;
 
 /**
@@ -20,12 +20,17 @@ public class ContentScreenPresenterImpl implements ContentScreenPresenter {
     @Override
     public void subscribe(BaseView baseView) {
         contentViewWeakReference = new WeakReference<>((ContentScreenView) baseView);
-        contentScreenInteractor = new ContentScreenInteractorImpl();
+        contentScreenInteractor = new ContentScreenInteractorImpl(contentViewWeakReference.get());
     }
 
     @Override
     public void unSubscribe() {
-        if(NullUtils.isNotNull(contentViewWeakReference)) contentViewWeakReference.clear();
-        if(NullUtils.isNotNull(contentScreenInteractor)) contentScreenInteractor = null;
+        if (NullUtils.isNotNull(contentViewWeakReference)) contentViewWeakReference.clear();
+        if (NullUtils.isNotNull(contentScreenInteractor)) contentScreenInteractor = null;
+    }
+
+    @Override
+    public void getData() {
+        contentScreenInteractor.fetchingData();
     }
 }

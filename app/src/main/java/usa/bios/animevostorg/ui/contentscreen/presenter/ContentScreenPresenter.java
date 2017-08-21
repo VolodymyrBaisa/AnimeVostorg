@@ -1,4 +1,4 @@
-package usa.bios.animevostorg.ui.contentscreen;
+package usa.bios.animevostorg.ui.contentscreen.presenter;
 
 import usa.bios.animevostorg.BasePresenter;
 
@@ -7,5 +7,5 @@ import usa.bios.animevostorg.BasePresenter;
  */
 
 public interface ContentScreenPresenter extends BasePresenter {
-
+    void getData();
 }

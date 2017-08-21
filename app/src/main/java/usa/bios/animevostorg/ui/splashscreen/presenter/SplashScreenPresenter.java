@@ -1,4 +1,4 @@
-package usa.bios.animevostorg.ui.splashscreen;
+package usa.bios.animevostorg.ui.splashscreen.presenter;
 
 import usa.bios.animevostorg.BasePresenter;
 

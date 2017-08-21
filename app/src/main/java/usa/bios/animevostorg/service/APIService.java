@@ -3,6 +3,7 @@ package usa.bios.animevostorg.service;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.io.File;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -12,6 +13,9 @@ import okhttp3.Request;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
+import usa.bios.animevostorg.model.Data;
+import usa.bios.animevostorg.model.RealmDataList;
 import usa.bios.animevostorg.model.SplashScreen;
 
 /**
@@ -23,6 +27,12 @@ public interface APIService {
 
     @GET("/version.json")
     Observable<SplashScreen> getVersion();
+
+    @GET("/v1/last?")
+    Observable<List<Data>> getData(
+            @Query("page") Integer page,
+            @Query("quantity") Integer quantity
+    );
 
     class Factory {
         public static APIService create(File directory, String endpoint) {

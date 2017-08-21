@@ -46,11 +46,5 @@
             android:textColor="@color/colorLightGrayBlue"
             android:textSize="@dimen/splash_screen_logo_version_size"
             android:textStyle="bold" />
-
-        <ProgressBar
-            android:id="@+id/splashScreenLoading"
-            android:layout_width="@dimen/splash_screen_loading_version_size"
-            android:layout_height="@dimen/splash_screen_loading_version_size"
-            android:gravity="top" />
     </LinearLayout>
 </RelativeLayout>

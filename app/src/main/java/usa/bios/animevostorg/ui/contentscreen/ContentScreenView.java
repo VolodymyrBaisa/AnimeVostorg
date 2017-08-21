@@ -1,5 +1,7 @@
 package usa.bios.animevostorg.ui.contentscreen;
 
+import java.io.File;
+
 import usa.bios.animevostorg.BaseView;
 
 /**
@@ -7,4 +9,5 @@ import usa.bios.animevostorg.BaseView;
  */
 
 public interface ContentScreenView extends BaseView {
+    File getCacheDir();
 }

@@ -1,6 +1,7 @@
-package usa.bios.animevostorg.ui.splashscreen;
+package usa.bios.animevostorg.ui.splashscreen.presenter;
 
 import io.reactivex.disposables.Disposable;
+import usa.bios.animevostorg.ui.splashscreen.SplashScreenView;
 
 /**
  * Created by Bios on 8/13/2017.

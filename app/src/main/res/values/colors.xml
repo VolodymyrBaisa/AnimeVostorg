@@ -9,4 +9,5 @@
     <color name="colorBlackDarkBlue">#4c5d6e</color>
     <color name="colorLightGrayBlue">#aebac6</color>
     <color name="colorWhite">#ffffff</color>
+    <color name="colorBlackTransparent">#7b000000</color>
 </resources>
