@@ -25,7 +25,7 @@ public class ContentScreenInteractorImpl implements ContentScreenInteractor {
     public Disposable fetchingData() {
         return APIService.Factory.create(contentScreenView.getCacheDir(), ENDPOINT).getData(1, QUANTITY).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(realmDataList -> {
-                            System.out.println(123456);
+                            System.out.println(realmDataList.getData().get(0).getScreenImage().get(0).value);
                         },
                         error -> {
                             error.printStackTrace();

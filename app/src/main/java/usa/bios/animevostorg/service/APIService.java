@@ -1,5 +1,7 @@
 package usa.bios.animevostorg.service;
 
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.io.File;
@@ -7,6 +9,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
+import io.realm.RealmList;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -15,8 +18,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 import usa.bios.animevostorg.model.Data;
-import usa.bios.animevostorg.model.RealmDataList;
+import usa.bios.animevostorg.model.DataList;
+import usa.bios.animevostorg.model.RealmString;
 import usa.bios.animevostorg.model.SplashScreen;
+import usa.bios.animevostorg.utils.RealmStringListTypeAdapter;
 
 /**
  * Created by Bios on 8/6/2017.
@@ -29,7 +34,7 @@ public interface APIService {
     Observable<SplashScreen> getVersion();
 
     @GET("/v1/last?")
-    Observable<List<Data>> getData(
+    Observable<DataList> getData(
             @Query("page") Integer page,
             @Query("quantity") Integer quantity
     );
@@ -52,12 +57,17 @@ public interface APIService {
             Cache cache = new Cache(directory, cacheSize);
             builder.cache(cache);
 
+            GsonConverterFactory gsonConFactory = GsonConverterFactory
+                    .create(new GsonBuilder()
+                            .registerTypeAdapter(new TypeToken<RealmList<RealmString>>(){}.getType(),
+                                    RealmStringListTypeAdapter.INSTANCE).create());
+
             OkHttpClient client = builder.build();
 
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(endpoint)
                     .client(client)
-                    .addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(gsonConFactory)
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build();
 

@@ -3,11 +3,8 @@ package usa.bios.animevostorg.model;
 import java.util.List;
 
 import io.realm.RealmList;
-import io.realm.RealmModel;
 import io.realm.RealmObject;
 import io.realm.annotations.RealmClass;
-import io.realm.annotations.RealmModule;
-import usa.bios.animevostorg.RealmString;
 
 /**
  * Created by Bios on 8/16/2017.
