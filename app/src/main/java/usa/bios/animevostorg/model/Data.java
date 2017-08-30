@@ -1,9 +1,8 @@
 package usa.bios.animevostorg.model;
 
-import java.util.List;
-
 import io.realm.RealmList;
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.RealmClass;
 
 /**
@@ -11,7 +10,9 @@ import io.realm.annotations.RealmClass;
  */
 
 @RealmClass
-public class Data extends RealmObject {
+public class Data extends RealmObject{
+    @PrimaryKey
+    private int realmId;
     private RealmList<RealmString> screenImage;
     private int rating;
     private int votes;
@@ -28,6 +29,14 @@ public class Data extends RealmObject {
     private String type;
     private int id;
     private int isLikes;
+
+    public int getRealmId() {
+        return realmId;
+    }
+
+    public void setRealmId(int realmId) {
+        this.realmId = realmId;
+    }
 
     public RealmList<RealmString> getScreenImage() {
         return screenImage;

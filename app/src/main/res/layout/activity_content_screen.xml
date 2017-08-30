@@ -14,12 +14,14 @@
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/contentSwipeRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbarLayout">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/contentRecyclerContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:scrollbars="vertical"
             tools:listitem="@layout/item_content_layout" />
     </android.support.v4.widget.SwipeRefreshLayout>
 

@@ -1,8 +1,12 @@
 package usa.bios.animevostorg.ui.contentscreen.presenter.impl;
 
+import java.util.List;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import usa.bios.animevostorg.dao.DataDao;
+import usa.bios.animevostorg.model.Data;
 import usa.bios.animevostorg.service.APIService;
 import usa.bios.animevostorg.ui.contentscreen.ContentScreenView;
 import usa.bios.animevostorg.ui.contentscreen.presenter.ContentScreenInteractor;
@@ -24,8 +28,11 @@ public class ContentScreenInteractorImpl implements ContentScreenInteractor {
     @Override
     public Disposable fetchingData() {
         return APIService.Factory.create(contentScreenView.getCacheDir(), ENDPOINT).getData(1, QUANTITY).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).subscribe(realmDataList -> {
-                            System.out.println(realmDataList.getData().get(0).getScreenImage().get(0).value);
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(dataList -> {
+                            List<Data> datas = dataList.getData();
+                            DataDao dataDao = new DataDao();
+
+                            datas.forEach(data -> dataDao.storeOrUpdateData(data));
                         },
                         error -> {
                             error.printStackTrace();

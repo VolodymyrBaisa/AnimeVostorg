@@ -1,5 +1,7 @@
 package usa.bios.animevostorg.dao;
 
+import java.util.List;
+
 import io.realm.Realm;
 import usa.bios.animevostorg.model.SplashScreen;
 
@@ -14,8 +16,8 @@ public class SplashScreenDao {
         realm.executeTransaction(realm1 -> realm1.insertOrUpdate(splashScreen));
     }
 
-    public SplashScreen getSplashScreen() {
+    public List<SplashScreen> getSplashScreen() {
         Realm realm = Realm.getDefaultInstance();
-        return realm.where(SplashScreen.class).findFirst();
+        return realm.where(SplashScreen.class).findAllAsync();
     }
 }

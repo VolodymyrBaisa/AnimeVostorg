@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.io.File;
 
 import usa.bios.animevostorg.R;
+import usa.bios.animevostorg.dao.DataDao;
 import usa.bios.animevostorg.ui.contentscreen.adapter.ContentScreenRecyclerAdapter;
 import usa.bios.animevostorg.ui.contentscreen.presenter.ContentScreenPresenter;
 import usa.bios.animevostorg.ui.contentscreen.presenter.impl.ContentScreenPresenterImpl;
@@ -80,7 +81,7 @@ public class ContentScreenActivity extends AppCompatActivity implements ContentS
     private void setRecyclerView() {
         if (NullUtils.isNotNull(recyclerView)) {
             recyclerView.setHasFixedSize(true);
-            recyclerView.setAdapter(new ContentScreenRecyclerAdapter(contentScreenPresenter));
+            recyclerView.setAdapter(new ContentScreenRecyclerAdapter(new DataDao()));
             recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
         }
     }

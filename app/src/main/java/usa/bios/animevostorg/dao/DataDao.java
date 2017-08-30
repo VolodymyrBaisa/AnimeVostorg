@@ -1,27 +1,41 @@
 package usa.bios.animevostorg.dao;
 
-import java.util.List;
-
 import io.realm.Realm;
-import usa.bios.animevostorg.model.DataList;
+import io.realm.RealmResults;
+import usa.bios.animevostorg.model.Data;
+import usa.bios.animevostorg.utils.NullUtils;
 
 /**
  * Created by Bios on 8/16/2017.
  */
 
 public class DataDao {
-    public void storeOrUpdateData(DataList data) {
+    private static final String ID = "realmId";
+
+    public void storeOrUpdateData(Data data) {
         Realm realm = Realm.getDefaultInstance();
-        realm.executeTransaction(realm1 -> realm1.insertOrUpdate(data));
+        realm.executeTransaction(realm1 -> {
+
+            Number number = realm1.where(Data.class).max(ID);
+            int nextId;
+            if (NullUtils.isNotNull(number)) {
+                nextId = number.intValue() + 1;
+            } else {
+                nextId = 1;
+            }
+
+            data.setRealmId(nextId);
+            realm1.insertOrUpdate(data);
+        });
     }
 
-    public List<DataList> getData() {
+    public RealmResults<Data> getData() {
         Realm realm = Realm.getDefaultInstance();
-        return realm.where(DataList.class).findAll();
+        return realm.where(Data.class).findAllAsync();
     }
 
     public void deleteData() {
         Realm realm = Realm.getDefaultInstance();
-        realm.delete(DataList.class);
+        realm.delete(Data.class);
     }
 }
