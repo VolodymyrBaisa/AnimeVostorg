@@ -5,17 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.gson.Gson;
-
-import java.util.HashMap;
-
 import io.realm.RealmResults;
 import usa.bios.animevostorg.R;
 import usa.bios.animevostorg.dao.DataDao;
 import usa.bios.animevostorg.model.Data;
 import usa.bios.animevostorg.ui.contentscreen.viewmodel.ItemContentScreenViewModel;
+import usa.bios.animevostorg.utils.CalcUtils;
 import usa.bios.animevostorg.utils.GsonUtils;
 import usa.bios.animevostorg.utils.NullUtils;
+import usa.bios.animevostorg.utils.ParserUtils;
 
 /**
  * Created by BIOS on 3/26/2017.
@@ -23,6 +21,7 @@ import usa.bios.animevostorg.utils.NullUtils;
 
 public class ContentScreenRecyclerAdapter extends RecyclerView.Adapter<ContentScreenViewHolder> {
     private RealmResults<Data> dataRealmResults;
+    private static final String SERIES_TOTAL_PATTERN = "\\[([0-9,-]*[а-я,\\s]*[0-9,+]*)\\]";
 
     public ContentScreenRecyclerAdapter(DataDao dataDao) {
         dataDao.getData().addChangeListener(datas -> {
@@ -43,8 +42,8 @@ public class ContentScreenRecyclerAdapter extends RecyclerView.Adapter<ContentSc
             Data data = dataRealmResults.get(position);
             ItemContentScreenViewModel itemContentScreenViewModel = holder.itemContentScreenViewModel;
 
-            itemContentScreenViewModel.contentRating.set(data.getRating());
-            itemContentScreenViewModel.contentVotes.set(data.getVotes());
+            itemContentScreenViewModel.contentRating.set(CalcUtils.rating(data.getRating(), data.getVotes()));
+            itemContentScreenViewModel.contentSeriesTotal.set(ParserUtils.getSeriesTotal(data.getTitle(), SERIES_TOTAL_PATTERN));
             itemContentScreenViewModel.contentDescription.set(data.getDescription());
             itemContentScreenViewModel.contentTitle.set(data.getTitle());
             itemContentScreenViewModel.contentSeries.set(GsonUtils.getElementCount(data.getSeries()));

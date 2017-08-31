@@ -56,7 +56,9 @@
                         android:paddingTop="3dp"
                         android:textColor="@color/colorWhite"
                         android:textSize="@dimen/content_screen_card_view_text_size"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:visibility="@{content.contentSeries == 0 ? view.GONE : view.VISIBLE}"
+                        android:text="@{content.contentSeriesTotal}"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -72,7 +74,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingLeft="10dp"
-                        android:paddingRight="10dp">
+                        android:paddingRight="10dp"
+                        android:visibility="@{String.valueOf(content.contentTitle).empty ? view.GONE : view.VISIBLE}">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -96,7 +99,8 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:visibility="@{String.valueOf(content.contentYear).empty ? view.GONE : view.VISIBLE}">
 
                             <TextView
                                 style="@style/TextAppearanceStyle"
@@ -116,7 +120,8 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:visibility="@{String.valueOf(content.contentGenre).empty ? view.GONE : view.VISIBLE}">
 
                             <TextView
                                 style="@style/TextAppearanceStyle"
@@ -142,7 +147,8 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:visibility="@{String.valueOf(content.contentType).empty ? view.GONE : view.VISIBLE}">
 
                             <TextView
                                 style="@style/TextAppearanceStyle"
@@ -168,7 +174,8 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:visibility="@{content.contentSeries == 0 ? view.GONE : view.VISIBLE}">
 
                             <TextView
                                 style="@style/TextAppearanceStyle"
@@ -198,6 +205,7 @@
                             android:paddingBottom="5dp">
 
                             <TextView
+                                style="@style/TextAppearanceStyle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginEnd="5dp"
@@ -210,7 +218,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
                                 android:numStars="5"
-                                android:stepSize="0.1" />
+                                android:stepSize="0.1"
+                                android:rating="@{content.contentRating}"/>
                         </LinearLayout>
 
                     </LinearLayout>

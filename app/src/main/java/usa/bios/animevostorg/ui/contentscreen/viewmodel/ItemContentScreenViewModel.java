@@ -9,7 +9,7 @@ import android.databinding.ObservableInt;
 
 public class ItemContentScreenViewModel {
     public ObservableInt contentRating = new ObservableInt(0);
-    public ObservableInt contentVotes = new ObservableInt(0);
+    public ObservableField<String> contentSeriesTotal = new ObservableField<>();
     public ObservableField<String> contentDescription = new ObservableField<>();
     public ObservableField<String> contentTitle = new ObservableField<>();
     public ObservableInt contentSeries = new ObservableInt();
