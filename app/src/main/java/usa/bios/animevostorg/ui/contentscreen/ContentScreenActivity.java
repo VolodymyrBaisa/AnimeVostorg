@@ -2,6 +2,7 @@ package usa.bios.animevostorg.ui.contentscreen;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -30,6 +31,7 @@ public class ContentScreenActivity extends AppCompatActivity implements ContentS
     private Toolbar toolbar;
     private TextView toolbarLabel;
     private RecyclerView recyclerView;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,6 +47,7 @@ public class ContentScreenActivity extends AppCompatActivity implements ContentS
         toolbar = (Toolbar) findViewById(R.id.toolbarLayout);
         toolbarLabel = (TextView) findViewById(R.id.toolbarLabel);
         recyclerView = (RecyclerView) findViewById(R.id.contentRecyclerContainer);
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.contentSwipeRefreshLayout);
     }
 
     @Override
@@ -53,6 +56,7 @@ public class ContentScreenActivity extends AppCompatActivity implements ContentS
 
         setToolbar();
         setRecyclerView();
+        setSwipeRefreshLayout();
     }
 
     private void setToolbar() {
@@ -83,6 +87,24 @@ public class ContentScreenActivity extends AppCompatActivity implements ContentS
             recyclerView.setHasFixedSize(true);
             recyclerView.setAdapter(new ContentScreenRecyclerAdapter(new DataDao()));
             recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
+            recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                    super.onScrolled(recyclerView, dx, dy);
+                    GridLayoutManager gridLayoutManager = ((GridLayoutManager) recyclerView.getLayoutManager());
+
+                   int firstVisibleItemPositions = gridLayoutManager.findFirstVisibleItemPosition();
+                   int visibleItemCount = gridLayoutManager.getChildCount();
+                   int totalItemCount = gridLayoutManager.getItemCount();
+                    contentScreenPresenter.onScrolledRecyclerView(firstVisibleItemPositions, visibleItemCount, totalItemCount);
+                }
+            });
+        }
+    }
+
+    private void setSwipeRefreshLayout(){
+        if (NullUtils.isNotNull(swipeRefreshLayout)) {
+            swipeRefreshLayout.setOnRefreshListener(() -> contentScreenPresenter.onRefresh());
         }
     }
 
@@ -90,7 +112,7 @@ public class ContentScreenActivity extends AppCompatActivity implements ContentS
     protected void onStart() {
         super.onStart();
         contentScreenPresenter.subscribe(this);
-        contentScreenPresenter.getData();
+        contentScreenPresenter.getData(1);
     }
 
     @Override

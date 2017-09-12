@@ -5,6 +5,7 @@ import java.lang.ref.WeakReference;
 import io.reactivex.disposables.Disposable;
 import usa.bios.animevostorg.BaseView;
 import usa.bios.animevostorg.BuildConfig;
+import usa.bios.animevostorg.dao.RealmStringDao;
 import usa.bios.animevostorg.ui.splashscreen.SplashScreenView;
 import usa.bios.animevostorg.ui.splashscreen.listener.LauncherActivityListener;
 import usa.bios.animevostorg.ui.splashscreen.presenter.SplashScreenInteractor;
@@ -44,6 +45,12 @@ public class SplashScreenPresenterImpl implements SplashScreenPresenter, Launche
     public void launchContentActivity() {
         preparationForLaunch();
     }
+
+    @Override
+    public void clearRealmStringData() {
+        new RealmStringDao().deleteData();
+    }
+
 
     private void preparationForLaunch() {
         SplashScreenView splashScreenView = splashScreenViewWeakReference.get();

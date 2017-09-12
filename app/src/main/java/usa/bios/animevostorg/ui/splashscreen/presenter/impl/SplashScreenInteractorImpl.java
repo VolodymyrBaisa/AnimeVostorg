@@ -36,7 +36,7 @@ public class SplashScreenInteractorImpl implements SplashScreenInteractor {
         return APIService.Factory.create(splashScreenView.getCacheDir(), ENDPOINT).getVersion().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(
                         splashScreen -> {
-                            new SplashScreenDao().storeOrUpdateSplashScreen(splashScreen);
+                            new SplashScreenDao().storeOrUpdateData(splashScreen);
                             launcherActivityListener.launchActivity();
                         },
                         error -> {
@@ -58,4 +58,6 @@ public class SplashScreenInteractorImpl implements SplashScreenInteractor {
                     }
                 });
     }
+
+
 }

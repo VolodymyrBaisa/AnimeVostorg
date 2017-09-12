@@ -57,7 +57,7 @@
                         android:textColor="@color/colorWhite"
                         android:textSize="@dimen/content_screen_card_view_text_size"
                         android:textStyle="bold"
-                        android:visibility="@{content.contentSeries == 0 ? view.GONE : view.VISIBLE}"
+                        android:visibility="@{String.valueOf(content.contentSeriesTotal).empty ? view.GONE : view.VISIBLE}"
                         android:text="@{content.contentSeriesTotal}"/>
                 </LinearLayout>
 

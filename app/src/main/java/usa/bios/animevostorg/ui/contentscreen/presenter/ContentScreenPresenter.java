@@ -6,6 +6,6 @@ import usa.bios.animevostorg.BasePresenter;
  * Created by Bios on 8/9/2017.
  */
 
-public interface ContentScreenPresenter extends BasePresenter {
-    void getData();
+public interface ContentScreenPresenter extends BasePresenter, RecyclerViewListener, SwipeRefreshListener {
+    void getData(int page);
 }

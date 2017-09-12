@@ -8,4 +8,5 @@ import usa.bios.animevostorg.BasePresenter;
 
 public interface SplashScreenPresenter extends BasePresenter {
     void launchContentActivity();
+    void clearRealmStringData();
 }

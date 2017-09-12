@@ -10,9 +10,9 @@ import io.realm.annotations.RealmClass;
  */
 
 @RealmClass
-public class Data extends RealmObject{
+public class Data extends RealmObject {
     @PrimaryKey
-    private int realmId;
+    private int id;
     private RealmList<RealmString> screenImage;
     private int rating;
     private int votes;
@@ -27,15 +27,10 @@ public class Data extends RealmObject{
     private String year;
     private String genre;
     private String type;
-    private int id;
     private int isLikes;
 
-    public int getRealmId() {
-        return realmId;
-    }
-
-    public void setRealmId(int realmId) {
-        this.realmId = realmId;
+    public int getId() {
+        return id;
     }
 
     public RealmList<RealmString> getScreenImage() {
@@ -92,10 +87,6 @@ public class Data extends RealmObject{
 
     public String getType() {
         return type;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public int getIsLikes() {

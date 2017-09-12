@@ -21,7 +21,7 @@ import usa.bios.animevostorg.utils.ParserUtils;
 
 public class ContentScreenRecyclerAdapter extends RecyclerView.Adapter<ContentScreenViewHolder> {
     private RealmResults<Data> dataRealmResults;
-    private static final String SERIES_TOTAL_PATTERN = "\\[([0-9,-]*[а-я,\\s]*[0-9,+]*)\\]";
+    private static final String SERIES_TOTAL_PATTERN = "\\[(([0-9,-]*||[0-9,A-Z,\\s]*)[а-я,\\s]*[0-9,+]*)\\]";
 
     public ContentScreenRecyclerAdapter(DataDao dataDao) {
         dataDao.getData().addChangeListener(datas -> {

@@ -14,6 +14,7 @@ import usa.bios.animevostorg.utils.ImageUtils;
  */
 
 public class ContentScreenBindingAdapter {
+    private static final String ENDPOINT = "http://animevost.org";
 
     @BindingAdapter({"bind:font"})
     public static void setFont(TextView textView, String fontName) {
@@ -24,11 +25,19 @@ public class ContentScreenBindingAdapter {
 
     @BindingAdapter({"bind:imageUrl"})
     public static void loadImage(ImageView view, String imageUrl) {
+        if(!imageUrl.contains("http")){
+            imageUrl = ENDPOINT.concat(imageUrl);
+        }
         ImageUtils.loadImage(view, imageUrl);
     }
 
     @BindingAdapter({"bind:imageUrls", "imageIndex"})
     public static void loadImage(ImageView view, List<String> imageUrls, int imageIndex) {
-        ImageUtils.loadImage(view, imageUrls, imageIndex);
+        String url = imageUrls.get(imageIndex);
+
+        if(!url.contains("http")){
+            url = ENDPOINT.concat(url);
+        }
+        ImageUtils.loadImage(view, url);
     }
 }

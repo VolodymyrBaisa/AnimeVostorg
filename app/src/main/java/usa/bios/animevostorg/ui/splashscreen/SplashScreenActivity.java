@@ -67,6 +67,8 @@ public class SplashScreenActivity extends AppCompatActivity implements SplashScr
     protected void onStart() {
         super.onStart();
         splashScreenPresenter.subscribe(this);
+        //Need to be checked
+       // splashScreenPresenter.clearRealmStringData();
         splashScreenPresenter.launchContentActivity();
     }
 
