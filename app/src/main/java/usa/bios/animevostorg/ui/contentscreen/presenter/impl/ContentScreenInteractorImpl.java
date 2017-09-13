@@ -8,6 +8,7 @@ import io.reactivex.schedulers.Schedulers;
 import usa.bios.animevostorg.dao.DataDao;
 import usa.bios.animevostorg.dao.PageDao;
 import usa.bios.animevostorg.model.Data;
+import usa.bios.animevostorg.model.DataList;
 import usa.bios.animevostorg.model.Page;
 import usa.bios.animevostorg.service.APIService;
 import usa.bios.animevostorg.ui.contentscreen.ContentScreenView;
@@ -19,7 +20,8 @@ import usa.bios.animevostorg.ui.contentscreen.presenter.ContentScreenInteractor;
 
 public class ContentScreenInteractorImpl implements ContentScreenInteractor {
     private static final String ENDPOINT = "https://api.animevost.org";
-    private static final int QUANTITY = 4;
+    private static final int QUANTITY = 20;
+    private static final int HIDE_ITEM = 5;
 
     private ContentScreenView contentScreenView;
 
@@ -36,17 +38,23 @@ public class ContentScreenInteractorImpl implements ContentScreenInteractor {
         return APIService.Factory.create(contentScreenView.getCacheDir(), ENDPOINT).getData(page, QUANTITY).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(dataList -> {
                             isConnected = true;
-                            List<Data> datas = dataList.getData();
                             DataDao dataDao = new DataDao();
                             if (page == 1) dataDao.deleteData();
+
                             setPage(page);
-                            datas.forEach(data -> dataDao.storeOrUpdateData(data));
+                            saveData(dataList, dataDao);
+
+                            contentScreenView.setSwipeRefreshing(false);
                         },
                         error -> {
                             loading = false;
                             isConnected = false;
-                            error.printStackTrace();
                         });
+    }
+
+    private void saveData(DataList dataList, DataDao dataDao) {
+        List<Data> datas = dataList.getData();
+        datas.forEach(data -> dataDao.storeOrUpdateData(data));
     }
 
     @Override
@@ -62,14 +70,14 @@ public class ContentScreenInteractorImpl implements ContentScreenInteractor {
             }
         }
 
-        if (!loading && ((visibleItemCount + firstVisibleItemPositions) >= totalItemCount)) {
-
+        if (!loading && ((visibleItemCount + firstVisibleItemPositions + HIDE_ITEM) >= totalItemCount)) {
             if (isConnected) {
                 increasePage();
             }
-                fetchingData(getPage());
-                previousTotal = totalItemCount;
-                loading = true;
+
+            fetchingData(getPage());
+            previousTotal = totalItemCount;
+            loading = true;
 
         }
     }

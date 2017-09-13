@@ -50,6 +50,7 @@ dependencies {
         exclude module: 'jsr305'
     })
     testCompile 'junit:junit:4.12'
+    compile 'com.android.support:design:26.+'
     compile 'com.android.support:appcompat-v7:26.+'
     //Retrofit 2
     compile 'com.squareup.retrofit2:converter-gson:2.+'

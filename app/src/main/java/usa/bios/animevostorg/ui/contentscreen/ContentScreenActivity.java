@@ -2,6 +2,7 @@ package usa.bios.animevostorg.ui.contentscreen;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -32,6 +33,7 @@ public class ContentScreenActivity extends AppCompatActivity implements ContentS
     private TextView toolbarLabel;
     private RecyclerView recyclerView;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private FloatingActionButton floatingActionButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,6 +50,7 @@ public class ContentScreenActivity extends AppCompatActivity implements ContentS
         toolbarLabel = (TextView) findViewById(R.id.toolbarLabel);
         recyclerView = (RecyclerView) findViewById(R.id.contentRecyclerContainer);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.contentSwipeRefreshLayout);
+        floatingActionButton = (FloatingActionButton) findViewById(R.id.contentFab);
     }
 
     @Override
@@ -57,6 +60,7 @@ public class ContentScreenActivity extends AppCompatActivity implements ContentS
         setToolbar();
         setRecyclerView();
         setSwipeRefreshLayout();
+        setFab();
     }
 
     private void setToolbar() {
@@ -93,18 +97,36 @@ public class ContentScreenActivity extends AppCompatActivity implements ContentS
                     super.onScrolled(recyclerView, dx, dy);
                     GridLayoutManager gridLayoutManager = ((GridLayoutManager) recyclerView.getLayoutManager());
 
-                   int firstVisibleItemPositions = gridLayoutManager.findFirstVisibleItemPosition();
-                   int visibleItemCount = gridLayoutManager.getChildCount();
-                   int totalItemCount = gridLayoutManager.getItemCount();
+                    int firstVisibleItemPositions = gridLayoutManager.findFirstVisibleItemPosition();
+                    int visibleItemCount = gridLayoutManager.getChildCount();
+                    int totalItemCount = gridLayoutManager.getItemCount();
                     contentScreenPresenter.onScrolledRecyclerView(firstVisibleItemPositions, visibleItemCount, totalItemCount);
                 }
             });
         }
     }
 
-    private void setSwipeRefreshLayout(){
+    private void setSwipeRefreshLayout() {
         if (NullUtils.isNotNull(swipeRefreshLayout)) {
             swipeRefreshLayout.setOnRefreshListener(() -> contentScreenPresenter.onRefresh());
+            swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark);
+        }
+    }
+
+    @Override
+    public void setSwipeRefreshing(boolean refreshing) {
+        if (NullUtils.isNotNull(swipeRefreshLayout)) {
+            swipeRefreshLayout.setRefreshing(refreshing);
+        }
+    }
+
+    private void setFab() {
+        if (NullUtils.isNotNull(floatingActionButton)) {
+            floatingActionButton.setOnClickListener(view -> {
+                if (NullUtils.isNotNull(recyclerView)) {
+                    recyclerView.smoothScrollToPosition(0);
+                }
+            });
         }
     }
 
