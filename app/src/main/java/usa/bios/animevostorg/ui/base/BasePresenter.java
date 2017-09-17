@@ -1,4 +1,4 @@
-package usa.bios.animevostorg;
+package usa.bios.animevostorg.ui.base;
 
 /**
  * Created by Bios on 8/5/2017.

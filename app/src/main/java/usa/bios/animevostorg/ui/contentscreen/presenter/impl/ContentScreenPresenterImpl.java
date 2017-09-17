@@ -1,10 +1,8 @@
 package usa.bios.animevostorg.ui.contentscreen.presenter.impl;
 
-import android.support.v7.widget.RecyclerView;
-
 import java.lang.ref.WeakReference;
 
-import usa.bios.animevostorg.BaseView;
+import usa.bios.animevostorg.ui.base.BaseView;
 import usa.bios.animevostorg.ui.contentscreen.ContentScreenView;
 import usa.bios.animevostorg.ui.contentscreen.presenter.ContentScreenInteractor;
 import usa.bios.animevostorg.ui.contentscreen.presenter.ContentScreenPresenter;
@@ -32,10 +30,9 @@ public class ContentScreenPresenterImpl implements ContentScreenPresenter {
     }
 
     @Override
-    public void getData(int page) {
-        contentScreenInteractor.fetchingData(page);
+    public void fetchingFirstPage() {
+        contentScreenInteractor.fetchingData(1);
     }
-
 
     @Override
     public void onScrolledRecyclerView(int firstVisibleItemPositions, int visibleItemCount, int totalItemCount) {
@@ -44,6 +41,6 @@ public class ContentScreenPresenterImpl implements ContentScreenPresenter {
 
     @Override
     public void onRefresh() {
-        contentScreenInteractor.onRefresh();
+        contentScreenInteractor.fetchingData(1);
     }
 }

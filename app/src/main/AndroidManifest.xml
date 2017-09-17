@@ -11,14 +11,14 @@
         android:theme="@style/AppTheme"
         android:name=".AnimeVostorg">
 
-        <activity android:name=".ui.splashscreen.SplashScreenActivity">
+        <activity android:name=".ui.splashscreen.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.contentscreen.ContentScreenActivity"
+        <activity android:name=".ui.contentscreen.ContentActivity"
             android:windowSoftInputMode="adjustNothing"/>
     </application>
 </manifest>

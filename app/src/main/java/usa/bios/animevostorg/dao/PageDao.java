@@ -19,16 +19,4 @@ public class PageDao {
             realm1.insertOrUpdate(page);
         });
     }
-
-    public boolean isEmpty() {
-        Realm realm = Realm.getDefaultInstance();
-        return realm.where(Page.class).findAll().isEmpty();
-    }
-
-    public void deleteData() {
-        Realm realm = Realm.getDefaultInstance();
-        realm.executeTransaction(realm1 ->
-                realm1.delete(Page.class)
-        );
-    }
 }

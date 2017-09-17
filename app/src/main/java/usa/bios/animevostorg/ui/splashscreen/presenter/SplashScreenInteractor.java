@@ -8,7 +8,6 @@ import usa.bios.animevostorg.ui.splashscreen.SplashScreenView;
  */
 
 public interface SplashScreenInteractor {
-    Disposable loadVersion(SplashScreenView splashScreenView);
-
-    Disposable loadPage(SplashScreenView splashScreenView);
+    Disposable launchActivity(SplashScreenView splashScreenView);
+    Disposable checkVersionApp(SplashScreenView splashScreenView);
 }

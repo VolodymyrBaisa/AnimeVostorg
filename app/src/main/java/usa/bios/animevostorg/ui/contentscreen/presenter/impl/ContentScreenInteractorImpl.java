@@ -5,6 +5,7 @@ import java.util.List;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import usa.bios.animevostorg.BuildConfig;
 import usa.bios.animevostorg.dao.DataDao;
 import usa.bios.animevostorg.dao.PageDao;
 import usa.bios.animevostorg.model.Data;
@@ -19,7 +20,6 @@ import usa.bios.animevostorg.ui.contentscreen.presenter.ContentScreenInteractor;
  */
 
 public class ContentScreenInteractorImpl implements ContentScreenInteractor {
-    private static final String ENDPOINT = "https://api.animevost.org";
     private static final int QUANTITY = 20;
     private static final int HIDE_ITEM = 5;
 
@@ -27,7 +27,6 @@ public class ContentScreenInteractorImpl implements ContentScreenInteractor {
 
     private int previousTotal = 0;
     private boolean loading = true;
-    private boolean isConnected = false;
 
     public ContentScreenInteractorImpl(ContentScreenView contentScreenView) {
         this.contentScreenView = contentScreenView;
@@ -35,31 +34,24 @@ public class ContentScreenInteractorImpl implements ContentScreenInteractor {
 
     @Override
     public Disposable fetchingData(int page) {
-        return APIService.Factory.create(contentScreenView.getCacheDir(), ENDPOINT).getData(page, QUANTITY).subscribeOn(Schedulers.io())
+        return APIService.Factory.create(contentScreenView.getCacheDir(), BuildConfig.SERVER_API_URL).getData(page, QUANTITY).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(dataList -> {
-                            isConnected = true;
                             DataDao dataDao = new DataDao();
                             if (page == 1) dataDao.deleteData();
-
                             setPage(page);
+
                             saveData(dataList, dataDao);
 
                             contentScreenView.setSwipeRefreshing(false);
                         },
                         error -> {
                             loading = false;
-                            isConnected = false;
                         });
     }
 
     private void saveData(DataList dataList, DataDao dataDao) {
         List<Data> datas = dataList.getData();
         datas.forEach(data -> dataDao.storeOrUpdateData(data));
-    }
-
-    @Override
-    public void onRefresh() {
-        fetchingData(1);
     }
 
     @Override
@@ -71,33 +63,29 @@ public class ContentScreenInteractorImpl implements ContentScreenInteractor {
         }
 
         if (!loading && ((visibleItemCount + firstVisibleItemPositions + HIDE_ITEM) >= totalItemCount)) {
-            if (isConnected) {
+            if (contentScreenView.isNetworkConnected()) {
                 increasePage();
             }
 
             fetchingData(getPage());
             previousTotal = totalItemCount;
             loading = true;
-
         }
     }
 
-    @Override
-    public int getPage() {
+    private int getPage() {
         PageDao pageDao = new PageDao();
         return pageDao.getData().getPage();
     }
 
-    @Override
-    public void setPage(int index) {
+    private void setPage(int index) {
         PageDao pageDao = new PageDao();
         Page page = new Page();
         page.setPage(index);
         pageDao.storeOrUpdateData(page);
     }
 
-    @Override
-    public void increasePage() {
+    private void increasePage() {
         setPage(getPage() + 1);
     }
 }

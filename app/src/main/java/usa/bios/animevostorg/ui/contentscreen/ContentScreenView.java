@@ -1,13 +1,11 @@
 package usa.bios.animevostorg.ui.contentscreen;
 
-import java.io.File;
-
-import usa.bios.animevostorg.BaseView;
+import usa.bios.animevostorg.ui.base.BaseView;
 
 /**
  * Created by Bios on 8/9/2017.
  */
 
-public interface ContentScreenView extends BaseView, SwipeRefreshView{
-    File getCacheDir();
+public interface ContentScreenView extends BaseView {
+    void setSwipeRefreshing(boolean refreshing);
 }

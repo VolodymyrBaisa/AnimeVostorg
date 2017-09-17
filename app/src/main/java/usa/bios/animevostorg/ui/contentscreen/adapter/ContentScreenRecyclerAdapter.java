@@ -42,7 +42,7 @@ public class ContentScreenRecyclerAdapter extends RecyclerView.Adapter<ContentSc
             Data data = dataRealmResults.get(position);
             ItemContentScreenViewModel itemContentScreenViewModel = holder.itemContentScreenViewModel;
 
-            itemContentScreenViewModel.contentRating.set(CalcUtils.rating(data.getRating(), data.getVotes()));
+            itemContentScreenViewModel.contentRating.set(CalcUtils.calculateRating(data.getRating(), data.getVotes()));
             itemContentScreenViewModel.contentSeriesTotal.set(ParserUtils.getSeriesTotal(data.getTitle(), SERIES_TOTAL_PATTERN));
             itemContentScreenViewModel.contentDescription.set(data.getDescription());
             itemContentScreenViewModel.contentTitle.set(data.getTitle());

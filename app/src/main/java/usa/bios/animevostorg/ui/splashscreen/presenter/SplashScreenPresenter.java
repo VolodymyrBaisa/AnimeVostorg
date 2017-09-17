@@ -1,6 +1,6 @@
 package usa.bios.animevostorg.ui.splashscreen.presenter;
 
-import usa.bios.animevostorg.BasePresenter;
+import usa.bios.animevostorg.ui.base.BasePresenter;
 
 /**
  * Created by Bios on 8/6/2017.
@@ -8,5 +8,4 @@ import usa.bios.animevostorg.BasePresenter;
 
 public interface SplashScreenPresenter extends BasePresenter {
     void launchContentActivity();
-    void clearRealmStringData();
 }

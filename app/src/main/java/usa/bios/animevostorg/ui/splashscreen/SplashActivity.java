@@ -4,14 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
 
+import usa.bios.animevostorg.BuildConfig;
 import usa.bios.animevostorg.R;
-import usa.bios.animevostorg.ui.contentscreen.ContentScreenActivity;
+import usa.bios.animevostorg.ui.base.BaseActivity;
+import usa.bios.animevostorg.ui.contentscreen.ContentActivity;
 import usa.bios.animevostorg.ui.splashscreen.presenter.SplashScreenPresenter;
 import usa.bios.animevostorg.ui.splashscreen.presenter.impl.SplashScreenPresenterImpl;
 import usa.bios.animevostorg.utils.NullUtils;
@@ -21,7 +22,7 @@ import usa.bios.animevostorg.utils.TypefaceUtils;
  * Created by Bios on 8/2/2017.
  */
 
-public class SplashScreenActivity extends AppCompatActivity implements SplashScreenView {
+public class SplashActivity extends BaseActivity implements SplashScreenView {
     private static final String FONT = "fonts/roomfer.ttf";
 
     private SplashScreenPresenter splashScreenPresenter;
@@ -67,8 +68,6 @@ public class SplashScreenActivity extends AppCompatActivity implements SplashScr
     protected void onStart() {
         super.onStart();
         splashScreenPresenter.subscribe(this);
-        //Need to be checked
-       // splashScreenPresenter.clearRealmStringData();
         splashScreenPresenter.launchContentActivity();
     }
 
@@ -79,26 +78,16 @@ public class SplashScreenActivity extends AppCompatActivity implements SplashScr
     }
 
     @Override
-    public void setVersion(String version) {
-        if (NullUtils.isNotNull(screenVersion) && NullUtils.isNotNull(version)) {
-            screenVersion.setText(version);
+    public void appVersion() {
+        if (NullUtils.isNotNull(screenVersion)) {
+            screenVersion.setText(BuildConfig.VERSION_NAME);
         }
     }
 
     @Override
-    public void loadContentPage() {
-        Intent toHomePage = new Intent(this, ContentScreenActivity.class);
+    public void launchActivity() {
+        Intent toHomePage = new Intent(this, ContentActivity.class);
         startActivity(toHomePage);
         finish();
-    }
-
-    @Override
-    public File getCacheDir() {
-        return getBaseContext().getCacheDir();
-    }
-
-    @Override
-    public void showError(@StringRes int error) {
-        Toast.makeText(this, error, Toast.LENGTH_LONG).show();
     }
 }
