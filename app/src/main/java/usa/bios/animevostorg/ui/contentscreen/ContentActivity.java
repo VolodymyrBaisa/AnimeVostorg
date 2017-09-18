@@ -102,15 +102,19 @@ public class ContentActivity extends BaseActivity implements ContentScreenView {
                 @Override
                 public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                     super.onScrolled(recyclerView, dx, dy);
-                    GridLayoutManager gridLayoutManager = ((GridLayoutManager) recyclerView.getLayoutManager());
-
-                    int firstVisibleItemPositions = gridLayoutManager.findFirstVisibleItemPosition();
-                    int visibleItemCount = gridLayoutManager.getChildCount();
-                    int totalItemCount = gridLayoutManager.getItemCount();
-                    contentScreenPresenter.onScrolledRecyclerView(firstVisibleItemPositions, visibleItemCount, totalItemCount);
+                    scrolledRecyclerView(recyclerView);
                 }
             });
         }
+    }
+
+    private void scrolledRecyclerView(RecyclerView recyclerView) {
+        GridLayoutManager gridLayoutManager = ((GridLayoutManager) recyclerView.getLayoutManager());
+
+        int firstVisibleItemPositions = gridLayoutManager.findFirstVisibleItemPosition();
+        int visibleItemCount = gridLayoutManager.getChildCount();
+        int totalItemCount = gridLayoutManager.getItemCount();
+        contentScreenPresenter.onScrolledRecyclerView(firstVisibleItemPositions, visibleItemCount, totalItemCount);
     }
 
     private void setSwipeRefreshLayout() {

@@ -50,10 +50,9 @@ public class ContentScreenInteractorImpl implements ContentScreenInteractor {
                         error -> {
                             if (error instanceof HttpException) {
                                 contentScreenView.onHttpError(R.string.connection_error, ((HttpException) error).code());
-                            } else {
-                                contentScreenView.onError(R.string.internet_connection_error);
                             }
-                            contentScreenView.setSwipeRefreshing(false);
+
+                            contentScreenView.setSwipeRefreshing(true);
                             loading = false;
                         });
     }
@@ -72,11 +71,11 @@ public class ContentScreenInteractorImpl implements ContentScreenInteractor {
         }
 
         if (!loading && ((visibleItemCount + firstVisibleItemPositions + HIDE_ITEM) >= totalItemCount)) {
-            if (contentScreenView.isNetworkConnected()) {
+            if(contentScreenView.isNetworkConnected()){
                 increasePage();
             }
-
             fetchingData(getPage());
+
             previousTotal = totalItemCount;
             loading = true;
         }
