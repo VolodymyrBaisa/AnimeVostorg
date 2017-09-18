@@ -5,7 +5,6 @@ import com.google.gson.reflect.TypeToken;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.io.File;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -15,9 +14,12 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
-import usa.bios.animevostorg.model.Data;
+import usa.bios.animevostorg.BuildConfig;
 import usa.bios.animevostorg.model.DataList;
 import usa.bios.animevostorg.model.RealmString;
 import usa.bios.animevostorg.model.SplashScreen;
@@ -28,8 +30,6 @@ import usa.bios.animevostorg.utils.RealmStringListTypeAdapter;
  */
 
 public interface APIService {
-    String USER_AGENT = "Anime Vostorg";
-
     @GET("/version.json")
     Observable<SplashScreen> getVersion();
 
@@ -37,6 +37,15 @@ public interface APIService {
     Observable<DataList> getData(
             @Query("page") Integer page,
             @Query("quantity") Integer quantity
+    );
+
+    @FormUrlEncoded
+    @POST("/v1/search")
+    Observable<DataList> getFilteredData(
+            @Field("gen") String gen,
+            @Field("name") String name,
+            @Field("year") String year,
+            @Field("cat") String cat
     );
 
     class Factory {
@@ -49,7 +58,7 @@ public interface APIService {
 
 
             builder.addNetworkInterceptor(chain -> {
-                Request request = chain.request().newBuilder().addHeader("User-Agent", USER_AGENT).build();
+                Request request = chain.request().newBuilder().addHeader("User-Agent", BuildConfig.USER_AGENT).build();
                 return chain.proceed(request);
             });
 
@@ -59,7 +68,8 @@ public interface APIService {
 
             GsonConverterFactory gsonConFactory = GsonConverterFactory
                     .create(new GsonBuilder()
-                            .registerTypeAdapter(new TypeToken<RealmList<RealmString>>(){}.getType(),
+                            .registerTypeAdapter(new TypeToken<RealmList<RealmString>>() {
+                                    }.getType(),
                                     RealmStringListTypeAdapter.INSTANCE).create());
 
             OkHttpClient client = builder.build();

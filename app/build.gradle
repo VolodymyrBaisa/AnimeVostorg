@@ -10,11 +10,12 @@ android {
         minSdkVersion 19
         targetSdkVersion 26
         versionCode 1
-        versionName "1.0"
+        versionName "1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         buildConfigField('String' , 'SITE_URL', '\"http://animevost-app.ru\"')
         buildConfigField('String' , 'SERVER_API_URL', '\"https://api.animevost.org\"')
+        buildConfigField('String' , 'USER_AGENT', '\"AnimeVostorg\"')
     }
     buildTypes {
         debug {

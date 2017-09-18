@@ -3,11 +3,15 @@ package usa.bios.animevostorg.ui.contentscreen;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import usa.bios.animevostorg.R;
@@ -167,5 +171,29 @@ public class ContentActivity extends BaseActivity implements ContentScreenView {
     protected void onStop() {
         super.onStop();
         contentScreenPresenter.unSubscribe();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuItem mainActionMenuItem = getMenuItem(menu);
+        SearchView searchView = (SearchView) mainActionMenuItem.getActionView();
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    private MenuItem getMenuItem(Menu menu) {
+        getMenuInflater().inflate(R.menu.content_menu, menu);
+        return menu.findItem(R.id.content_screen_search);
     }
 }

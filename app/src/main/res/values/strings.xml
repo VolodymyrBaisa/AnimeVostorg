@@ -15,4 +15,6 @@
     <string name="director">Режиссёр:</string>
     <string name="rating">Рейтинг:</string>
     <string name="votes">Голосов:</string>
+
+    <string name="menu_search">Поиск</string>
 </resources>
