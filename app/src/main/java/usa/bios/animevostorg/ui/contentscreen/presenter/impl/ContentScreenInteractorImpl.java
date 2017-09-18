@@ -1,11 +1,14 @@
 package usa.bios.animevostorg.ui.contentscreen.presenter.impl;
 
+import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
+
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import usa.bios.animevostorg.BuildConfig;
+import usa.bios.animevostorg.R;
 import usa.bios.animevostorg.dao.DataDao;
 import usa.bios.animevostorg.dao.PageDao;
 import usa.bios.animevostorg.model.Data;
@@ -45,6 +48,12 @@ public class ContentScreenInteractorImpl implements ContentScreenInteractor {
                             contentScreenView.setSwipeRefreshing(false);
                         },
                         error -> {
+                            if (error instanceof HttpException) {
+                                contentScreenView.onHttpError(R.string.connection_error, ((HttpException) error).code());
+                            } else {
+                                contentScreenView.onError(R.string.internet_connection_error);
+                            }
+                            contentScreenView.setSwipeRefreshing(false);
                             loading = false;
                         });
     }

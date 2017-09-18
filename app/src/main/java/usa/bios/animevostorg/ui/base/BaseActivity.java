@@ -32,6 +32,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         showSnackBar(getString(resId));
     }
 
+    public void onHttpError(@StringRes int resId, int code) {
+        showSnackBar(getString(resId) + " " + code);
+    }
+
     @Override
     public void showMessage(@StringRes int resId) {
         showSnackBar(getString(resId));

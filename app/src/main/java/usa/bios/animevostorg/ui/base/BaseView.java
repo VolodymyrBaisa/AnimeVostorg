@@ -11,6 +11,8 @@ import java.io.File;
 public interface BaseView {
     void onError(@StringRes int resId);
 
+    void onHttpError(@StringRes int resId, int code);
+
     void showMessage(@StringRes int resId);
 
     boolean isNetworkConnected();

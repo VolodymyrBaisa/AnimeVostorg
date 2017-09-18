@@ -10,8 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
-import java.io.File;
-
 import usa.bios.animevostorg.R;
 import usa.bios.animevostorg.dao.DataDao;
 import usa.bios.animevostorg.ui.base.BaseActivity;
@@ -57,6 +55,7 @@ public class ContentActivity extends BaseActivity implements ContentScreenView {
         floatingActionButton = (FloatingActionButton) findViewById(R.id.contentFab);
     }
 
+
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
@@ -98,6 +97,7 @@ public class ContentActivity extends BaseActivity implements ContentScreenView {
             recyclerView.setHasFixedSize(true);
             recyclerView.setAdapter(new ContentScreenRecyclerAdapter(new DataDao()));
             recyclerView.setLayoutManager(new GridLayoutManager(this, CalcUtils.calculateNoOfColumns(this)));
+            recyclerView.scrollToPosition(recyclerScrollToPosition);
             recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
                 @Override
                 public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -150,14 +150,6 @@ public class ContentActivity extends BaseActivity implements ContentScreenView {
         super.onRestoreInstanceState(savedInstanceState);
         if (NullUtils.isNotNull(recyclerView)) {
             recyclerScrollToPosition = savedInstanceState.getInt(RECYCLER_ITEM_POSITION);
-        }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (NullUtils.isNotNull(recyclerView)) {
-            recyclerView.scrollToPosition(recyclerScrollToPosition);
         }
     }
 

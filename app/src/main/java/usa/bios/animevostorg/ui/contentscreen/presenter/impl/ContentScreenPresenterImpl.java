@@ -26,7 +26,6 @@ public class ContentScreenPresenterImpl implements ContentScreenPresenter {
     @Override
     public void unSubscribe() {
         if (NullUtils.isNotNull(contentViewWeakReference)) contentViewWeakReference.clear();
-        if (NullUtils.isNotNull(contentScreenInteractor)) contentScreenInteractor = null;
     }
 
     @Override

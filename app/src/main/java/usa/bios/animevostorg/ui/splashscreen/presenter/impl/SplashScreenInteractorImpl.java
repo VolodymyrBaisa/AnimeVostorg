@@ -37,14 +37,12 @@ public class SplashScreenInteractorImpl implements SplashScreenInteractor {
     public Disposable checkVersionApp(SplashScreenView splashScreenView) {
         return APIService.Factory.create(splashScreenView.getCacheDir(), BuildConfig.SITE_URL).getVersion().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(
-                        splashScreen -> {
-                            new SplashScreenDao().storeOrUpdateData(splashScreen);
-                        },
+                        splashScreen -> new SplashScreenDao().storeOrUpdateData(splashScreen),
                         error -> {
                             if (error instanceof HttpException) {
-                                splashScreenView.onError(R.string.internet_connection_error);
+                                splashScreenView.onHttpError(R.string.connection_error, ((HttpException) error).code());
                             } else {
-                                splashScreenView.onError(R.string.connection_error);
+                                splashScreenView.onError(R.string.internet_connection_error);
                             }
                         });
     }
