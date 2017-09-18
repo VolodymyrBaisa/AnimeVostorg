@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="content_screen_card_width">210dp</dimen>
+    <dimen name="content_screen_card_height">290dp</dimen>
+    <dimen name="content_screen_card_corner_radius">5dp</dimen>
+    <dimen name="content_screen_card_elevation">5dp</dimen>
+    <dimen name="content_screen_card_title_text_size">30sp</dimen>
+    <dimen name="content_screen_card_view_text_size">16sp</dimen>
+
+</resources>
