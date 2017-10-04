@@ -37,6 +37,7 @@ public class ContentScreenInteractorImpl implements ContentScreenInteractor {
 
     @Override
     public Disposable fetchingData(int page) {
+        contentScreenView.setSwipeRefreshing(true);
         return APIService.Factory.create(contentScreenView.getCacheDir(), BuildConfig.SERVER_API_URL).getData(page, QUANTITY).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(dataList -> {
                             DataDao dataDao = new DataDao();
@@ -52,7 +53,7 @@ public class ContentScreenInteractorImpl implements ContentScreenInteractor {
                                 contentScreenView.onHttpError(R.string.connection_error, ((HttpException) error).code());
                             }
 
-                            contentScreenView.setSwipeRefreshing(true);
+                            contentScreenView.setSwipeRefreshing(false);
                             loading = false;
                         });
     }
@@ -71,7 +72,7 @@ public class ContentScreenInteractorImpl implements ContentScreenInteractor {
         }
 
         if (!loading && ((visibleItemCount + firstVisibleItemPositions + HIDE_ITEM) >= totalItemCount)) {
-            if(contentScreenView.isNetworkConnected()){
+            if (contentScreenView.isNetworkConnected()) {
                 increasePage();
             }
             fetchingData(getPage());
@@ -96,4 +97,6 @@ public class ContentScreenInteractorImpl implements ContentScreenInteractor {
     private void increasePage() {
         setPage(getPage() + 1);
     }
+
+
 }

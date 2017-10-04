@@ -20,5 +20,8 @@
 
         <activity android:name=".ui.contentscreen.ContentActivity"
             android:windowSoftInputMode="adjustNothing"/>
+
+        <activity android:name=".ui.search.SearchActivity"
+            android:windowSoftInputMode="adjustNothing"/>
     </application>
 </manifest>

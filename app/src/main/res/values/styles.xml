@@ -1,5 +1,4 @@
 <resources>
-
     <style name="AppTheme" parent="AppTheme.Base" />
 
     <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
@@ -28,7 +27,7 @@
     <style name="RatingBarStyle" parent="@android:style/Widget.RatingBar">
         <item name="android:minHeight">16dip</item>
         <item name="android:maxHeight">16dip</item>
-        <item name="android:progressDrawable">@drawable/ratingbar</item>
+        <item name="android:progressDrawable">@drawable/rating_bar</item>
         <item name="android:isIndicator">true</item>
     </style>
 </resources>

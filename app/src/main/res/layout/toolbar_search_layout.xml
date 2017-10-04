@@ -5,16 +5,15 @@
     style="@style/ToolBarStyle"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    app:contentInsetStartWithNavigation="0dp"
     app:theme="@style/ThemeOverlay.AppCompat.ActionBar"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
-    <TextView
-        android:id="@+id/toolbarLabel"
-        android:layout_width="wrap_content"
+    <usa.bios.animevostorg.ui.custom.SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:gravity="center"
-        android:textColor="@color/colorWhite"
-        android:textSize="25sp" />
+        android:gravity="center" />
 
 </android.support.v7.widget.Toolbar>

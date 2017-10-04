@@ -32,7 +32,7 @@ public class ContentScreenRecyclerAdapter extends RecyclerView.Adapter<ContentSc
 
     @Override
     public ContentScreenViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_content_layout, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_layout, parent, false);
         return new ContentScreenViewHolder(view);
     }
 

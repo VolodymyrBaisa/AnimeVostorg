@@ -4,7 +4,7 @@ import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import usa.bios.animevostorg.databinding.ItemContentLayoutBinding;
+import usa.bios.animevostorg.databinding.ItemLayoutBinding;
 import usa.bios.animevostorg.ui.contentscreen.viewmodel.ItemContentScreenViewModel;
 
 /**
@@ -16,7 +16,7 @@ public class ContentScreenViewHolder extends RecyclerView.ViewHolder {
 
     ContentScreenViewHolder(View itemView) {
         super(itemView);
-        ItemContentLayoutBinding itemContentLayoutBinding = DataBindingUtil.bind(itemView);
-        itemContentLayoutBinding.setContent(itemContentScreenViewModel);
+        ItemLayoutBinding itemLayoutBinding = DataBindingUtil.bind(itemView);
+        itemLayoutBinding.setContent(itemContentScreenViewModel);
     }
 }

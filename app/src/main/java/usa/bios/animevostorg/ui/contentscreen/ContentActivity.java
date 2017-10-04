@@ -1,14 +1,13 @@
 package usa.bios.animevostorg.ui.contentscreen;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,6 +19,7 @@ import usa.bios.animevostorg.ui.base.BaseActivity;
 import usa.bios.animevostorg.ui.contentscreen.adapter.ContentScreenRecyclerAdapter;
 import usa.bios.animevostorg.ui.contentscreen.presenter.ContentScreenPresenter;
 import usa.bios.animevostorg.ui.contentscreen.presenter.impl.ContentScreenPresenterImpl;
+import usa.bios.animevostorg.ui.search.SearchActivity;
 import usa.bios.animevostorg.utils.CalcUtils;
 import usa.bios.animevostorg.utils.NullUtils;
 import usa.bios.animevostorg.utils.TypefaceUtils;
@@ -30,7 +30,7 @@ import usa.bios.animevostorg.utils.TypefaceUtils;
 
 public class ContentActivity extends BaseActivity implements ContentScreenView {
     private static final String FONT = "fonts/roomfer.ttf";
-    private static final String RECYCLER_ITEM_POSITION = "recycler_item_position";
+    private static final String RECYCLER_ITEM_POSITION = "content_recycler_item_position";
 
     private ContentScreenPresenter contentScreenPresenter;
 
@@ -63,7 +63,7 @@ public class ContentActivity extends BaseActivity implements ContentScreenView {
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        if (savedInstanceState == null) {
+        if (NullUtils.isNull(savedInstanceState)) {
             contentScreenPresenter.fetchingFirstPage();
         }
 
@@ -175,21 +175,13 @@ public class ContentActivity extends BaseActivity implements ContentScreenView {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuItem mainActionMenuItem = getMenuItem(menu);
-        SearchView searchView = (SearchView) mainActionMenuItem.getActionView();
-        searchView.setMaxWidth(Integer.MAX_VALUE);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
+        MenuItem item = getMenuItem(menu);
+        item.setOnMenuItemClickListener(item1 -> {
+            Intent toSearchPage = new Intent(this, SearchActivity.class);
+            startActivity(toSearchPage);
+            return true;
         });
-        return super.onCreateOptionsMenu(menu);
+        return true;
     }
 
     private MenuItem getMenuItem(Menu menu) {

@@ -1,4 +1,4 @@
-package usa.bios.animevostorg.ui.contentscreen.behavior;
+package usa.bios.animevostorg.ui.behavior;
 
 import android.content.Context;
 import android.support.design.widget.CoordinatorLayout;
