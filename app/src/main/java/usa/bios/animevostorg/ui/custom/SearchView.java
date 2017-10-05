@@ -2,16 +2,19 @@ package usa.bios.animevostorg.ui.custom;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.os.Build;
 import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.Filter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -22,17 +25,14 @@ import usa.bios.animevostorg.R;
  * Created by Bios on 10/1/2017.
  */
 
-public class SearchView extends FrameLayout implements Filter.FilterListener, OnQueryTextListener {
+public class SearchView extends FrameLayout {
 
     private Context context;
 
     private OnQueryTextListener onQueryChangeListener;
-    private SearchViewListener searchViewListener;
 
-    private LinearLayout searchLayout;
     private EditText searchTextView;
     private ImageView actionEmptyBtn;
-    private boolean isSearchOpen = false;
 
     public SearchView(@NonNull Context context) {
         this(context, null);
@@ -53,13 +53,14 @@ public class SearchView extends FrameLayout implements Filter.FilterListener, On
 
     private void initStyle(AttributeSet attrs, int defStyleAttr) {
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.SearchView, defStyleAttr, 0);
-                    a.recycle();
+
+        a.recycle();
     }
 
     private void initiateView() {
         LayoutInflater.from(context).inflate(R.layout.search_view, this, true);
 
-        searchLayout = findViewById(R.id.search_layout);
+        LinearLayout searchLayout = findViewById(R.id.search_layout);
 
         searchTextView = searchLayout.findViewById(R.id.searchTextView);
         actionEmptyBtn = searchLayout.findViewById(R.id.actionEmptyBtn);
@@ -73,6 +74,26 @@ public class SearchView extends FrameLayout implements Filter.FilterListener, On
             onSubmitQuery();
             return true;
         });
+
+        searchTextView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                SearchView.this.onTextChanged(charSequence);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        showSearch();
+        showKeyboard(searchTextView);
     }
 
     private void onSubmitQuery() {
@@ -84,67 +105,53 @@ public class SearchView extends FrameLayout implements Filter.FilterListener, On
         }
     }
 
-    public void setMenuItem(MenuItem menuItem) {
-        menuItem.setOnMenuItemClickListener(item -> {
-            showSearch();
-            return true;
-        });
-    }
-
-    public void showSearch() {
-        if (isSearchOpen()) {
-            return;
-        }
+    private void showSearch() {
         searchTextView.setText(null);
         searchTextView.requestFocus();
-
-        searchTextView.setVisibility(VISIBLE);
-        if (searchViewListener != null) {
-            searchViewListener.onSearchViewShown();
-        }
-        isSearchOpen = true;
     }
 
-    public void closeSearch() {
-        if (!isSearchOpen()) {
-            return;
-        }
-
+    private void closeSearch() {
         searchTextView.setText(null);
+        super.clearFocus();
         clearFocus();
-
-        searchLayout.setVisibility(GONE);
-        if (searchViewListener != null) {
-            searchViewListener.onSearchViewClosed();
-        }
-        isSearchOpen = false;
     }
 
-    public boolean isSearchOpen() {
-        return isSearchOpen;
+    private void showKeyboard(View view) {
+        view.requestFocus();
+        InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+    }
+
+    private void hideKeyboard(View view) {
+        InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    private void onTextChanged(CharSequence newText) {
+        CharSequence text = searchTextView.getText();
+        boolean hasText = !TextUtils.isEmpty(text);
+        if (hasText) {
+            actionEmptyBtn.setVisibility(VISIBLE);
+        } else {
+            actionEmptyBtn.setVisibility(GONE);
+        }
     }
 
     @Override
-    public void onFilterComplete(int i) {
+    public void clearFocus() {
+        hideKeyboard(searchTextView);
+        super.clearFocus();
+        searchTextView.clearFocus();
+    }
 
+    public void setMenuItem(MenuItem menuItem) {
+        if (menuItem.getItemId() == android.R.id.home) {
+            closeSearch();
+        }
     }
 
     public void setOnQueryTextListener(OnQueryTextListener listener) {
         onQueryChangeListener = listener;
-    }
-
-    public void setOnSearchViewListener(SearchViewListener listener) {
-        searchViewListener = listener;
-    }
-
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        return false;
-    }
-
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        return false;
     }
 
     private final OnClickListener onClickListener = new OnClickListener() {

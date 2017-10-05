@@ -2,7 +2,6 @@ package usa.bios.animevostorg.ui.splashscreen.presenter.impl;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 
-import java.lang.ref.WeakReference;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;

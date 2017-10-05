@@ -16,5 +16,5 @@
     <string name="rating">Рейтинг:</string>
     <string name="votes">Голосов:</string>
 
-    <string name="search_hint_text">Поиск аниме...</string>
+    <string name="search_hint_text">Поиск аниме</string>
 </resources>

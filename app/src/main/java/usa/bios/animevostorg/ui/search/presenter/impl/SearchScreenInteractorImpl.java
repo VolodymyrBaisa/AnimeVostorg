@@ -2,10 +2,11 @@ package usa.bios.animevostorg.ui.search.presenter.impl;
 
 import android.view.View;
 
+import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.HttpException;
 import usa.bios.animevostorg.BuildConfig;
 import usa.bios.animevostorg.R;
 import usa.bios.animevostorg.service.APIService;

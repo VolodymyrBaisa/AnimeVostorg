@@ -151,7 +151,6 @@ public class SearchActivity extends BaseActivity implements SearchScreenView, On
         return super.onOptionsItemSelected(item);
     }
 
-
     @Override
     public boolean onQueryTextSubmit(String query) {
         searchScreenPresenter.fetchingSearchData(query);
