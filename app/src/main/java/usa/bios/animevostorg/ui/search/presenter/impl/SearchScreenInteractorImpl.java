@@ -30,10 +30,18 @@ public class SearchScreenInteractorImpl implements SearchScreenInteractor {
         return APIService.Factory.create(searchScreenView.getCacheDir(), BuildConfig.SERVER_API_URL).getFilteredData(gen, name, year, cat).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(dataList -> {
                             searchScreenView.showLoading(View.GONE);
+
                         },
                         error -> {
                             if (error instanceof HttpException) {
-                                searchScreenView.onHttpError(R.string.connection_error, ((HttpException) error).code());
+                                switch (((HttpException) error).code()) {
+                                    case 500:
+                                        searchScreenView.onError(R.string.no_search_results_found);
+                                        break;
+                                    default:
+                                        searchScreenView.onHttpError(R.string.connection_error, ((HttpException) error).code());
+                                        break;
+                                }
                             } else {
                                 searchScreenView.onError(R.string.internet_connection_error);
                             }

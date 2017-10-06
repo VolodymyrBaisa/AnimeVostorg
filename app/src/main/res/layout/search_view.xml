@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="@null"
-        android:hint="@string/search_hint_text"
+        android:hint="@string/search_hint"
         android:imeOptions="actionSearch"
         android:maxLines="1"
         android:paddingLeft="@dimen/search_view_text_padding"
@@ -20,6 +20,7 @@
         android:textColor="@android:color/black"
         android:textColorHint="@android:color/black"
         android:layout_weight="1"
+        android:inputType="textNoSuggestions"
         android:textCursorDrawable="@null" />
 
     <ImageButton

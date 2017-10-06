@@ -14,8 +14,8 @@ import usa.bios.animevostorg.R;
 import usa.bios.animevostorg.dao.DataDao;
 import usa.bios.animevostorg.ui.base.BaseActivity;
 import usa.bios.animevostorg.ui.contentscreen.adapter.ContentScreenRecyclerAdapter;
-import usa.bios.animevostorg.ui.custom.OnQueryTextListener;
-import usa.bios.animevostorg.ui.custom.SearchView;
+import usa.bios.animevostorg.ui.custom.search.OnQueryTextListener;
+import usa.bios.animevostorg.ui.custom.search.SearchView;
 import usa.bios.animevostorg.ui.search.presenter.SearchScreenPresenter;
 import usa.bios.animevostorg.ui.search.presenter.impl.SearchScreenPresenterImpl;
 import usa.bios.animevostorg.utils.CalcUtils;
@@ -154,11 +154,6 @@ public class SearchActivity extends BaseActivity implements SearchScreenView, On
     @Override
     public boolean onQueryTextSubmit(String query) {
         searchScreenPresenter.fetchingSearchData(query);
-        return false;
-    }
-
-    @Override
-    public boolean onQueryTextChange(String newText) {
         return false;
     }
 }

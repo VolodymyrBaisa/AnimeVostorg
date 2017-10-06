@@ -39,7 +39,7 @@ public class SplashScreenInteractorImpl implements SplashScreenInteractor {
                         splashScreen -> new SplashScreenDao().storeOrUpdateData(splashScreen),
                         error -> {
                             if (error instanceof HttpException) {
-                                splashScreenView.onHttpError(R.string.connection_error, ((HttpException) error).code());
+                                    splashScreenView.onHttpError(R.string.connection_error, ((HttpException) error).code());
                             } else {
                                 splashScreenView.onError(R.string.internet_connection_error);
                             }

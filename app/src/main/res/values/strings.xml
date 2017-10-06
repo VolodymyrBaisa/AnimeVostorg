@@ -6,7 +6,9 @@
     <string name="splash_screen_title_piece_3">App</string>
 
     <string name="internet_connection_error">Не удалось подключиться к Интернету.</string>
-    <string name="connection_error">Oшибка подключения</string>
+    <string name="connection_error">Oшибка подключения.</string>
+
+    <string name="no_search_results_found">По вашему запросу ничего не найдено.</string>
 
     <string name="release_date">Год выхода:</string>
     <string name="genre">Жанр:</string>
@@ -16,5 +18,5 @@
     <string name="rating">Рейтинг:</string>
     <string name="votes">Голосов:</string>
 
-    <string name="search_hint_text">Поиск аниме</string>
+    <string name="search_hint">Поиск аниме</string>
 </resources>

@@ -1,8 +1,8 @@
-package usa.bios.animevostorg.ui.custom;
+package usa.bios.animevostorg.ui.custom.search;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.os.Build;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -53,7 +53,23 @@ public class SearchView extends FrameLayout {
 
     private void initStyle(AttributeSet attrs, int defStyleAttr) {
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.SearchView, defStyleAttr, 0);
+        if (a != null) {
+            if (a.hasValue(R.styleable.SearchView_android_textColor)) {
+                setTextColor(a.getColor(R.styleable.SearchView_android_textColor, 0));
+            }
 
+            if (a.hasValue(R.styleable.SearchView_android_textColorHint)) {
+                setHintTextColor(a.getColor(R.styleable.SearchView_android_textColorHint, 0));
+            }
+
+            if (a.hasValue(R.styleable.SearchView_android_hint)) {
+                setHint(a.getString(R.styleable.SearchView_android_hint));
+            }
+
+            if (a.hasValue(R.styleable.SearchView_searchCloseIcon)) {
+                setCloseIcon(a.getDrawable(R.styleable.SearchView_searchCloseIcon));
+            }
+        }
         a.recycle();
     }
 
@@ -152,6 +168,22 @@ public class SearchView extends FrameLayout {
 
     public void setOnQueryTextListener(OnQueryTextListener listener) {
         onQueryChangeListener = listener;
+    }
+
+    public void setTextColor(int color) {
+        searchTextView.setTextColor(color);
+    }
+
+    public void setHintTextColor(int color) {
+        searchTextView.setHintTextColor(color);
+    }
+
+    public void setHint(CharSequence hint) {
+        searchTextView.setHint(hint);
+    }
+
+    public void setCloseIcon(Drawable drawable) {
+        actionEmptyBtn.setImageDrawable(drawable);
     }
 
     private final OnClickListener onClickListener = new OnClickListener() {

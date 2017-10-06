@@ -9,7 +9,8 @@
     app:theme="@style/ThemeOverlay.AppCompat.ActionBar"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
-    <usa.bios.animevostorg.ui.custom.SearchView
+    <usa.bios.animevostorg.ui.custom.search.SearchView
+        style="@style/SearchViewStyle"
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
