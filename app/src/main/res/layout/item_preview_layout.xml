@@ -11,7 +11,7 @@
 
         <variable
             name="content"
-            type="usa.bios.animevostorg.ui.contentscreen.viewmodel.ItemContentScreenViewModel" />
+            type="usa.bios.animevostorg.ui.viewmodel.ItemPreviewScreenViewModel" />
     </data>
 
     <LinearLayout

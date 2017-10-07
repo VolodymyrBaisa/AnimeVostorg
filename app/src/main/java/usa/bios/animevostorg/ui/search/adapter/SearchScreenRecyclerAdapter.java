@@ -5,11 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import io.realm.RealmResults;
 import usa.bios.animevostorg.R;
-import usa.bios.animevostorg.dao.DataDao;
 import usa.bios.animevostorg.model.Data;
-import usa.bios.animevostorg.ui.contentscreen.viewmodel.ItemContentScreenViewModel;
+import usa.bios.animevostorg.model.DataList;
+import usa.bios.animevostorg.ui.viewmodel.ItemPreviewScreenViewModel;
 import usa.bios.animevostorg.utils.CalcUtils;
 import usa.bios.animevostorg.utils.GsonUtils;
 import usa.bios.animevostorg.utils.NullUtils;
@@ -20,40 +19,36 @@ import usa.bios.animevostorg.utils.ParserUtils;
  */
 
 public class SearchScreenRecyclerAdapter extends RecyclerView.Adapter<SearchScreenViewHolder> {
-    private RealmResults<Data> dataRealmResults;
+    private DataList dataList;
     private static final String SERIES_TOTAL_PATTERN = "\\[(([0-9,-]*||[0-9,A-Z,\\s]*)[а-я,\\s]*[0-9,+]*)\\]";
 
-    public SearchScreenRecyclerAdapter(DataDao dataDao) {
-        dataDao.getData().addChangeListener(datas -> {
-            dataRealmResults = datas;
-            notifyDataSetChanged();
-        });
+    public SearchScreenRecyclerAdapter() {
     }
 
     @Override
     public SearchScreenViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_layout, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_preview_layout, parent, false);
         return new SearchScreenViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(SearchScreenViewHolder holder, int position) {
-        if (NullUtils.isNotNull(dataRealmResults)) {
-            Data data = dataRealmResults.get(position);
-            ItemContentScreenViewModel itemContentScreenViewModel = holder.itemSearchScreenViewModel;
+        if (NullUtils.isNotNull(dataList)) {
+            Data data = dataList.getData().get(position);
+            ItemPreviewScreenViewModel itemPreviewScreenViewModel = holder.itemPreviewScreenViewModel;
 
-            itemContentScreenViewModel.contentRating.set(CalcUtils.calculateRating(data.getRating(), data.getVotes()));
-            itemContentScreenViewModel.contentSeriesTotal.set(ParserUtils.getSeriesTotal(data.getTitle(), SERIES_TOTAL_PATTERN));
-            itemContentScreenViewModel.contentDescription.set(data.getDescription());
-            itemContentScreenViewModel.contentTitle.set(data.getTitle());
-            itemContentScreenViewModel.contentSeries.set(GsonUtils.getElementCount(data.getSeries()));
-            itemContentScreenViewModel.contentCount.set(data.getCount());
-            itemContentScreenViewModel.contentDirector.set(data.getDirector());
-            itemContentScreenViewModel.contentUrlImagePreview.set(data.getUrlImagePreview());
-            itemContentScreenViewModel.contentYear.set(data.getYear());
-            itemContentScreenViewModel.contentGenre.set(data.getGenre());
-            itemContentScreenViewModel.contentType.set(data.getType());
-            itemContentScreenViewModel.contentId.set(data.getId());
+            itemPreviewScreenViewModel.contentRating.set(CalcUtils.calculateRating(data.getRating(), data.getVotes()));
+            itemPreviewScreenViewModel.contentSeriesTotal.set(ParserUtils.getSeriesTotal(data.getTitle(), SERIES_TOTAL_PATTERN));
+            itemPreviewScreenViewModel.contentDescription.set(data.getDescription());
+            itemPreviewScreenViewModel.contentTitle.set(data.getTitle());
+            itemPreviewScreenViewModel.contentSeries.set(GsonUtils.getElementCount(data.getSeries()));
+            itemPreviewScreenViewModel.contentCount.set(data.getCount());
+            itemPreviewScreenViewModel.contentDirector.set(data.getDirector());
+            itemPreviewScreenViewModel.contentUrlImagePreview.set(data.getUrlImagePreview());
+            itemPreviewScreenViewModel.contentYear.set(data.getYear());
+            itemPreviewScreenViewModel.contentGenre.set(data.getGenre());
+            itemPreviewScreenViewModel.contentType.set(data.getType());
+            itemPreviewScreenViewModel.contentId.set(data.getId());
         }
     }
 
@@ -64,9 +59,18 @@ public class SearchScreenRecyclerAdapter extends RecyclerView.Adapter<SearchScre
 
     @Override
     public int getItemCount() {
-        if (NullUtils.isNotNull(dataRealmResults)) {
-            return dataRealmResults.size();
+        if (NullUtils.isNotNull(dataList)) {
+            return dataList.getData().size();
         }
         return 0;
+    }
+
+    public void setItems(DataList dataList) {
+        this.dataList = dataList;
+        notifyDataSetChanged();
+    }
+
+    public DataList geItems(){
+        return dataList;
     }
 }

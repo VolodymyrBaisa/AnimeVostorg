@@ -1,4 +1,4 @@
-package usa.bios.animevostorg.ui.search.viewmodel;
+package usa.bios.animevostorg.ui.viewmodel;
 
 import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
@@ -7,7 +7,7 @@ import android.databinding.ObservableInt;
  * Created by Bios on 8/29/2017.
  */
 
-public class ItemSearchScreenViewModel {
+public class ItemPreviewScreenViewModel {
     public ObservableInt contentRating = new ObservableInt(0);
     public ObservableField<String> contentSeriesTotal = new ObservableField<>();
     public ObservableField<String> contentDescription = new ObservableField<>();

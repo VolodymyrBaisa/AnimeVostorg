@@ -1,5 +1,6 @@
 package usa.bios.animevostorg.ui.search;
 
+import usa.bios.animevostorg.model.DataList;
 import usa.bios.animevostorg.ui.base.BaseView;
 
 /**
@@ -8,4 +9,6 @@ import usa.bios.animevostorg.ui.base.BaseView;
 
 public interface SearchScreenView extends BaseView {
     void showLoading(int visibility);
+
+    void setRecyclerAdapterItems(DataList dataList);
 }

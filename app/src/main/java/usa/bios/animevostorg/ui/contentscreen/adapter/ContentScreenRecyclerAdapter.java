@@ -9,7 +9,7 @@ import io.realm.RealmResults;
 import usa.bios.animevostorg.R;
 import usa.bios.animevostorg.dao.DataDao;
 import usa.bios.animevostorg.model.Data;
-import usa.bios.animevostorg.ui.contentscreen.viewmodel.ItemContentScreenViewModel;
+import usa.bios.animevostorg.ui.viewmodel.ItemPreviewScreenViewModel;
 import usa.bios.animevostorg.utils.CalcUtils;
 import usa.bios.animevostorg.utils.GsonUtils;
 import usa.bios.animevostorg.utils.NullUtils;
@@ -32,7 +32,7 @@ public class ContentScreenRecyclerAdapter extends RecyclerView.Adapter<ContentSc
 
     @Override
     public ContentScreenViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_layout, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_preview_layout, parent, false);
         return new ContentScreenViewHolder(view);
     }
 
@@ -40,7 +40,7 @@ public class ContentScreenRecyclerAdapter extends RecyclerView.Adapter<ContentSc
     public void onBindViewHolder(ContentScreenViewHolder holder, int position) {
         if (NullUtils.isNotNull(dataRealmResults)) {
             Data data = dataRealmResults.get(position);
-            ItemContentScreenViewModel itemContentScreenViewModel = holder.itemContentScreenViewModel;
+            ItemPreviewScreenViewModel itemContentScreenViewModel = holder.itemPreviewScreenViewModel;
 
             itemContentScreenViewModel.contentRating.set(CalcUtils.calculateRating(data.getRating(), data.getVotes()));
             itemContentScreenViewModel.contentSeriesTotal.set(ParserUtils.getSeriesTotal(data.getTitle(), SERIES_TOTAL_PATTERN));

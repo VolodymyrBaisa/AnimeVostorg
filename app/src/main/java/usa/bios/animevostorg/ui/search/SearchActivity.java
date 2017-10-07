@@ -11,11 +11,11 @@ import android.view.MenuItem;
 import android.widget.ProgressBar;
 
 import usa.bios.animevostorg.R;
-import usa.bios.animevostorg.dao.DataDao;
+import usa.bios.animevostorg.model.DataList;
 import usa.bios.animevostorg.ui.base.BaseActivity;
-import usa.bios.animevostorg.ui.contentscreen.adapter.ContentScreenRecyclerAdapter;
 import usa.bios.animevostorg.ui.custom.search.OnQueryTextListener;
 import usa.bios.animevostorg.ui.custom.search.SearchView;
+import usa.bios.animevostorg.ui.search.adapter.SearchScreenRecyclerAdapter;
 import usa.bios.animevostorg.ui.search.presenter.SearchScreenPresenter;
 import usa.bios.animevostorg.ui.search.presenter.impl.SearchScreenPresenterImpl;
 import usa.bios.animevostorg.utils.CalcUtils;
@@ -27,6 +27,7 @@ import usa.bios.animevostorg.utils.NullUtils;
 
 public class SearchActivity extends BaseActivity implements SearchScreenView, OnQueryTextListener {
     private static final String RECYCLER_ITEM_POSITION = "search_recycler_item_position";
+    private static final String RECYCLER_ITEMS = "search_recycler_items";
 
     private SearchScreenPresenter searchScreenPresenter;
 
@@ -36,6 +37,8 @@ public class SearchActivity extends BaseActivity implements SearchScreenView, On
     private ProgressBar progressBar;
     private FloatingActionButton floatingActionButton;
     private int recyclerScrollToPosition;
+
+    private SearchScreenRecyclerAdapter searchRecyclerAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,11 +53,10 @@ public class SearchActivity extends BaseActivity implements SearchScreenView, On
 
         toolbar = (Toolbar) findViewById(R.id.toolbarSearchLayout);
         search = (SearchView) findViewById(R.id.searchView);
-        recyclerView = (RecyclerView) findViewById(R.id.contentRecyclerContainer);
+        recyclerView = (RecyclerView) findViewById(R.id.searchRecyclerContainer);
         progressBar = (ProgressBar) findViewById(R.id.searchProgressBar);
-        floatingActionButton = (FloatingActionButton) findViewById(R.id.contentFab);
+        floatingActionButton = (FloatingActionButton) findViewById(R.id.searchFab);
     }
-
 
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
@@ -87,9 +89,16 @@ public class SearchActivity extends BaseActivity implements SearchScreenView, On
     private void setRecyclerView() {
         if (NullUtils.isNotNull(recyclerView)) {
             recyclerView.setHasFixedSize(true);
-            recyclerView.setAdapter(new ContentScreenRecyclerAdapter(new DataDao()));
             recyclerView.setLayoutManager(new GridLayoutManager(this, CalcUtils.calculateNoOfColumns(this)));
             recyclerView.scrollToPosition(recyclerScrollToPosition);
+        }
+    }
+
+    public void setRecyclerAdapterItems(DataList dataList){
+        if (NullUtils.isNotNull(recyclerView)) {
+            searchRecyclerAdapter = new SearchScreenRecyclerAdapter();
+            searchRecyclerAdapter.setItems(dataList);
+            recyclerView.setAdapter(searchRecyclerAdapter);
         }
     }
 
@@ -115,6 +124,7 @@ public class SearchActivity extends BaseActivity implements SearchScreenView, On
         super.onSaveInstanceState(outState);
         if (NullUtils.isNotNull(recyclerView)) {
             outState.putInt(RECYCLER_ITEM_POSITION, ((GridLayoutManager) recyclerView.getLayoutManager()).findFirstVisibleItemPosition());
+            outState.putParcelable(RECYCLER_ITEMS, searchRecyclerAdapter.geItems());
         }
     }
 
@@ -123,6 +133,7 @@ public class SearchActivity extends BaseActivity implements SearchScreenView, On
         super.onRestoreInstanceState(savedInstanceState);
         if (NullUtils.isNotNull(recyclerView)) {
             recyclerScrollToPosition = savedInstanceState.getInt(RECYCLER_ITEM_POSITION);
+            setRecyclerAdapterItems(savedInstanceState.getParcelable(RECYCLER_ITEMS));
         }
     }
 

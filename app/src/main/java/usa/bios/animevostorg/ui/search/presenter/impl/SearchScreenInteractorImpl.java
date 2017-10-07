@@ -30,7 +30,7 @@ public class SearchScreenInteractorImpl implements SearchScreenInteractor {
         return APIService.Factory.create(searchScreenView.getCacheDir(), BuildConfig.SERVER_API_URL).getFilteredData(gen, name, year, cat).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(dataList -> {
                             searchScreenView.showLoading(View.GONE);
-
+                            searchScreenView.setRecyclerAdapterItems(dataList);
                         },
                         error -> {
                             if (error instanceof HttpException) {
