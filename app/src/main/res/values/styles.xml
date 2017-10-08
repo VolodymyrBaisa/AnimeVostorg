@@ -1,4 +1,5 @@
 <resources>
+
     <style name="AppTheme" parent="AppTheme.Base" />
 
     <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
@@ -36,5 +37,12 @@
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:textColorHint">@color/colorOrangeLite</item>
         <item name="android:hint">@string/search_hint</item>
+    </style>
+
+    <style name="TitleStyle">
+        <item name="textColorPart1">@color/colorOrange</item>
+        <item name="textColorPart2">@color/colorLightBlue</item>
+        <item name="textColorPart3">@color/colorBlackDarkBlue</item>
+        <item name="textColorVersion">@color/colorLightGrayBlue</item>
     </style>
 </resources>

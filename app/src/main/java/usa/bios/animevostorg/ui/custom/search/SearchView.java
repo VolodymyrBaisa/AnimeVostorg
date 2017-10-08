@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import usa.bios.animevostorg.R;
+import usa.bios.animevostorg.utils.NullUtils;
 
 /**
  * Created by Bios on 10/1/2017.
@@ -69,14 +70,14 @@ public class SearchView extends FrameLayout {
             if (a.hasValue(R.styleable.SearchView_searchCloseIcon)) {
                 setCloseIcon(a.getDrawable(R.styleable.SearchView_searchCloseIcon));
             }
+            a.recycle();
         }
-        a.recycle();
     }
 
     private void initiateView() {
         LayoutInflater.from(context).inflate(R.layout.search_view, this, true);
 
-        LinearLayout searchLayout = findViewById(R.id.search_layout);
+        LinearLayout searchLayout = findViewById(R.id.searchLayout);
 
         searchTextView = searchLayout.findViewById(R.id.searchTextView);
         actionEmptyBtn = searchLayout.findViewById(R.id.actionEmptyBtn);
@@ -135,12 +136,16 @@ public class SearchView extends FrameLayout {
     private void showKeyboard(View view) {
         view.requestFocus();
         InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+        if (NullUtils.isNotNull(imm)) {
+            imm.toggleSoftInputFromWindow(view.getWindowToken(), InputMethodManager.SHOW_FORCED, 0);
+        }
     }
 
     private void hideKeyboard(View view) {
         InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        if (NullUtils.isNotNull(imm)) {
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 
     private void onTextChanged(CharSequence newText) {

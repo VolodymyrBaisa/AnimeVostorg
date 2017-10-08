@@ -13,6 +13,7 @@ import usa.bios.animevostorg.BuildConfig;
 import usa.bios.animevostorg.R;
 import usa.bios.animevostorg.ui.base.BaseActivity;
 import usa.bios.animevostorg.ui.contentscreen.ContentActivity;
+import usa.bios.animevostorg.ui.custom.title.TitleView;
 import usa.bios.animevostorg.ui.splashscreen.presenter.SplashScreenPresenter;
 import usa.bios.animevostorg.ui.splashscreen.presenter.impl.SplashScreenPresenterImpl;
 import usa.bios.animevostorg.utils.NullUtils;
@@ -23,13 +24,9 @@ import usa.bios.animevostorg.utils.TypefaceUtils;
  */
 
 public class SplashActivity extends BaseActivity implements SplashScreenView {
-    private static final String FONT = "fonts/roomfer.ttf";
 
     private SplashScreenPresenter splashScreenPresenter;
-    private TextView splashScreenPart1;
-    private TextView splashScreenPart2;
-    private TextView splashScreenPart3;
-    private TextView screenVersion;
+    private TitleView splashScreenTitleView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,27 +38,12 @@ public class SplashActivity extends BaseActivity implements SplashScreenView {
     private void init() {
         splashScreenPresenter = new SplashScreenPresenterImpl();
 
-        splashScreenPart1 = (TextView) findViewById(R.id.splashScreenPart1);
-        splashScreenPart2 = (TextView) findViewById(R.id.splashScreenPart2);
-        splashScreenPart3 = (TextView) findViewById(R.id.splashScreenPart3);
-        screenVersion = (TextView) findViewById(R.id.splashScreenVersion);
+        splashScreenTitleView = (TitleView) findViewById(R.id.splashTitleView);
     }
 
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        setTypeface();
-    }
-
-    private void setTypeface() {
-        if (NullUtils.isNotNull(splashScreenPart1) && NullUtils.isNotNull(splashScreenPart2)
-                && NullUtils.isNotNull(splashScreenPart3) && NullUtils.isNotNull(screenVersion)) {
-
-            splashScreenPart1.setTypeface(TypefaceUtils.font(this, FONT));
-            splashScreenPart2.setTypeface(TypefaceUtils.font(this, FONT));
-            splashScreenPart3.setTypeface(TypefaceUtils.font(this, FONT));
-            screenVersion.setTypeface(TypefaceUtils.font(this, FONT));
-        }
     }
 
     @Override
@@ -79,8 +61,8 @@ public class SplashActivity extends BaseActivity implements SplashScreenView {
 
     @Override
     public void appVersion() {
-        if (NullUtils.isNotNull(screenVersion)) {
-            screenVersion.setText(BuildConfig.VERSION_NAME);
+        if (NullUtils.isNotNull(splashScreenTitleView)) {
+            splashScreenTitleView.setTextVersion(BuildConfig.VERSION_NAME);
         }
     }
 
