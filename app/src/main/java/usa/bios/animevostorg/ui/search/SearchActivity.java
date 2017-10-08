@@ -94,7 +94,7 @@ public class SearchActivity extends BaseActivity implements SearchScreenView, On
         }
     }
 
-    public void setRecyclerAdapterItems(DataList dataList){
+    public void setRecyclerAdapterItems(DataList dataList) {
         if (NullUtils.isNotNull(recyclerView)) {
             searchRecyclerAdapter = new SearchScreenRecyclerAdapter();
             searchRecyclerAdapter.setItems(dataList);
@@ -124,7 +124,9 @@ public class SearchActivity extends BaseActivity implements SearchScreenView, On
         super.onSaveInstanceState(outState);
         if (NullUtils.isNotNull(recyclerView)) {
             outState.putInt(RECYCLER_ITEM_POSITION, ((GridLayoutManager) recyclerView.getLayoutManager()).findFirstVisibleItemPosition());
-            outState.putParcelable(RECYCLER_ITEMS, searchRecyclerAdapter.geItems());
+            if (NullUtils.isNotNull(searchRecyclerAdapter)) {
+                outState.putParcelable(RECYCLER_ITEMS, searchRecyclerAdapter.geItems());
+            }
         }
     }
 

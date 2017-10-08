@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import usa.bios.animevostorg.databinding.ItemPreviewLayoutBinding;
+import usa.bios.animevostorg.ui.handler.ItemPreviewScreenHandler;
 import usa.bios.animevostorg.ui.viewmodel.ItemPreviewScreenViewModel;
 
 /**
@@ -13,10 +14,12 @@ import usa.bios.animevostorg.ui.viewmodel.ItemPreviewScreenViewModel;
 
 public class SearchScreenViewHolder extends RecyclerView.ViewHolder {
     ItemPreviewScreenViewModel itemPreviewScreenViewModel = new ItemPreviewScreenViewModel();
+    ItemPreviewScreenHandler itemPreviewScreenHandler = new ItemPreviewScreenHandler();
 
     SearchScreenViewHolder(View itemView) {
         super(itemView);
         ItemPreviewLayoutBinding itemPreviewLayoutBinding = DataBindingUtil.bind(itemView);
         itemPreviewLayoutBinding.setContent(itemPreviewScreenViewModel);
+        itemPreviewLayoutBinding.setHandler(itemPreviewScreenHandler);
     }
 }

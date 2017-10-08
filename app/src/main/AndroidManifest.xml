@@ -23,5 +23,7 @@
 
         <activity android:name=".ui.search.SearchActivity"
             android:windowSoftInputMode="adjustNothing"/>
+
+        <activity android:name=".ui.description.DescriptionActivity"/>
     </application>
 </manifest>

@@ -10,6 +10,10 @@
             type="android.view.View" />
 
         <variable
+            name="handler"
+            type="usa.bios.animevostorg.ui.handler.ItemPreviewScreenHandler" />
+
+        <variable
             name="content"
             type="usa.bios.animevostorg.ui.viewmodel.ItemPreviewScreenViewModel" />
     </data>
@@ -24,6 +28,7 @@
             android:id="@+id/itemContentRoot"
             android:layout_width="@dimen/content_screen_card_width"
             android:layout_height="@dimen/content_screen_card_height"
+            android:onClick="@{(v)->handler.onClickCardItem(v, content.contentId.get())}"
             app:cardCornerRadius="@dimen/content_screen_card_corner_radius"
             app:cardElevation="@dimen/content_screen_card_elevation"
             app:cardUseCompatPadding="true">
@@ -54,11 +59,11 @@
                         android:paddingLeft="12dp"
                         android:paddingRight="12dp"
                         android:paddingTop="3dp"
+                        android:text="@{content.contentSeriesTotal}"
                         android:textColor="@color/colorWhite"
                         android:textSize="@dimen/content_screen_card_view_text_size"
                         android:textStyle="bold"
-                        android:visibility="@{String.valueOf(content.contentSeriesTotal).empty ? view.GONE : view.VISIBLE}"
-                        android:text="@{content.contentSeriesTotal}"/>
+                        android:visibility="@{String.valueOf(content.contentSeriesTotal).empty ? view.GONE : view.VISIBLE}" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -218,8 +223,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
                                 android:numStars="5"
-                                android:stepSize="0.1"
-                                android:rating="@{content.contentRating}"/>
+                                android:rating="@{content.contentRating}"
+                                android:stepSize="0.1" />
                         </LinearLayout>
 
                     </LinearLayout>
