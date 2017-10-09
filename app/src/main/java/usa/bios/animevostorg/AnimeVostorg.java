@@ -3,7 +3,6 @@ package usa.bios.animevostorg;
 import android.app.Application;
 
 import com.facebook.stetho.Stetho;
-import com.squareup.leakcanary.LeakCanary;
 import com.uphyca.stetho_realm.RealmInspectorModulesProvider;
 
 import io.realm.Realm;
@@ -29,8 +28,6 @@ public class AnimeVostorg extends Application {
                             .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
                             .enableWebKitInspector(RealmInspectorModulesProvider.builder(this).build())
                             .build());
-
-            LeakCanary.install(this);
         }
     }
 

@@ -1,5 +1,7 @@
 package usa.bios.animevostorg.model;
 
+import org.parceler.Parcel;
+
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -9,6 +11,7 @@ import io.realm.annotations.RealmClass;
  * Created by Bios on 8/16/2017.
  */
 
+@Parcel(value = Parcel.Serialization.BEAN, analyze = { Data.class })
 @RealmClass
 public class Data extends RealmObject {
     @PrimaryKey

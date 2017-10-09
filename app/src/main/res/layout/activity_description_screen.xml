@@ -1,23 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <android.support.design.widget.AppBarLayout
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="218dp"
-        android:fitsSystemWindows="true">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <android.support.design.widget.CollapsingToolbarLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
-            app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed">
+            android:layout_height="wrap_content">
 
-        </android.support.design.widget.CollapsingToolbarLayout>
+            <LinearLayout
+                android:id="@+id/descriptionPreviewLayout"
+                android:layout_width="match_parent"
+                android:layout_height="218dp"
+                android:fitsSystemWindows="true">
 
-    </android.support.design.widget.AppBarLayout>
+                <ImageView
+                    android:id="@+id/descriptionImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
 
-</android.support.design.widget.CoordinatorLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/descriptionPreviewLayout">
+
+            </LinearLayout>
+        </RelativeLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            android:src="@drawable/ic_star_off"
+            app:layout_anchor="@id/descriptionPreviewLayout"
+            app:layout_anchorGravity="bottom|end" />
+    </android.support.design.widget.CoordinatorLayout>
+</ScrollView>

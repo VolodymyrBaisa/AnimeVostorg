@@ -13,7 +13,7 @@
         android:orientation="vertical">
 
         <include
-            android:id="@+id/toolbarSearchLayout"
+            android:id="@+id/searchToolbarLayout"
             layout="@layout/toolbar_search_layout" />
 
             <android.support.v7.widget.RecyclerView
@@ -22,7 +22,7 @@
                 android:layout_height="match_parent"
                 android:scrollbars="vertical"
                 tools:listitem="@layout/item_preview_layout"
-                android:layout_below="@+id/toolbarSearchLayout"/>
+                android:layout_below="@+id/searchToolbarLayout"/>
 
         <ProgressBar
             android:id="@+id/searchProgressBar"

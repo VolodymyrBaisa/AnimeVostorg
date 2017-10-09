@@ -10,6 +10,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ProgressBar;
 
+import org.parceler.Parcels;
+
 import usa.bios.animevostorg.R;
 import usa.bios.animevostorg.model.DataList;
 import usa.bios.animevostorg.ui.base.BaseActivity;
@@ -51,7 +53,7 @@ public class SearchActivity extends BaseActivity implements SearchScreenView, On
     private void init() {
         searchScreenPresenter = new SearchScreenPresenterImpl();
 
-        toolbar = (Toolbar) findViewById(R.id.toolbarSearchLayout);
+        toolbar = (Toolbar) findViewById(R.id.searchToolbarLayout);
         search = (SearchView) findViewById(R.id.searchView);
         recyclerView = (RecyclerView) findViewById(R.id.searchRecyclerContainer);
         progressBar = (ProgressBar) findViewById(R.id.searchProgressBar);
@@ -125,7 +127,7 @@ public class SearchActivity extends BaseActivity implements SearchScreenView, On
         if (NullUtils.isNotNull(recyclerView)) {
             outState.putInt(RECYCLER_ITEM_POSITION, ((GridLayoutManager) recyclerView.getLayoutManager()).findFirstVisibleItemPosition());
             if (NullUtils.isNotNull(searchRecyclerAdapter)) {
-                outState.putParcelable(RECYCLER_ITEMS, searchRecyclerAdapter.geItems());
+                outState.putParcelable(RECYCLER_ITEMS, Parcels.wrap(searchRecyclerAdapter.geItems()));
             }
         }
     }
@@ -135,7 +137,7 @@ public class SearchActivity extends BaseActivity implements SearchScreenView, On
         super.onRestoreInstanceState(savedInstanceState);
         if (NullUtils.isNotNull(recyclerView)) {
             recyclerScrollToPosition = savedInstanceState.getInt(RECYCLER_ITEM_POSITION);
-            setRecyclerAdapterItems(savedInstanceState.getParcelable(RECYCLER_ITEMS));
+            setRecyclerAdapterItems(Parcels.unwrap(savedInstanceState.getParcelable(RECYCLER_ITEMS)));
         }
     }
 

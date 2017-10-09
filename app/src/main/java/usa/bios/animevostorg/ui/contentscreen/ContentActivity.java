@@ -52,7 +52,7 @@ public class ContentActivity extends BaseActivity implements ContentScreenView {
     private void init() {
         contentScreenPresenter = new ContentScreenPresenterImpl();
 
-        toolbar = (Toolbar) findViewById(R.id.toolbarLayout);
+        toolbar = (Toolbar) findViewById(R.id.contentToolbarLayout);
         toolbarLabel = (TextView) findViewById(R.id.toolbarLabel);
         recyclerView = (RecyclerView) findViewById(R.id.contentRecyclerContainer);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.contentSwipeRefreshLayout);

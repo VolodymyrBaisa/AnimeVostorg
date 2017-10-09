@@ -49,6 +49,7 @@ public class SearchScreenRecyclerAdapter extends RecyclerView.Adapter<SearchScre
             itemPreviewScreenViewModel.contentGenre.set(data.getGenre());
             itemPreviewScreenViewModel.contentType.set(data.getType());
             itemPreviewScreenViewModel.contentId.set(data.getId());
+            holder.itemPreviewScreenHandler.setBundleData(data);
         }
     }
 

@@ -54,6 +54,7 @@ public class ContentScreenRecyclerAdapter extends RecyclerView.Adapter<ContentSc
             itemContentScreenViewModel.contentGenre.set(data.getGenre());
             itemContentScreenViewModel.contentType.set(data.getType());
             itemContentScreenViewModel.contentId.set(data.getId());
+            holder.itemPreviewScreenHandler.setBundleData(data);
         }
     }
 
