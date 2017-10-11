@@ -1,5 +1,6 @@
 package usa.bios.animevostorg.ui.description;
 
+import usa.bios.animevostorg.model.Data;
 import usa.bios.animevostorg.ui.base.BaseView;
 
 /**
@@ -7,4 +8,5 @@ import usa.bios.animevostorg.ui.base.BaseView;
  */
 
 public interface DescriptionScreenView extends BaseView {
+    Data getData();
 }

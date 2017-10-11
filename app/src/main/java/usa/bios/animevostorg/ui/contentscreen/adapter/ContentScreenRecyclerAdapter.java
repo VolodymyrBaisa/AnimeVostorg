@@ -50,6 +50,7 @@ public class ContentScreenRecyclerAdapter extends RecyclerView.Adapter<ContentSc
             itemContentScreenViewModel.contentCount.set(data.getCount());
             itemContentScreenViewModel.contentDirector.set(data.getDirector());
             itemContentScreenViewModel.contentUrlImagePreview.set(data.getUrlImagePreview());
+            itemContentScreenViewModel.contentScreenImage.forEach(image -> data.getScreenImage());
             itemContentScreenViewModel.contentYear.set(data.getYear());
             itemContentScreenViewModel.contentGenre.set(data.getGenre());
             itemContentScreenViewModel.contentType.set(data.getType());

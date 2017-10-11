@@ -13,4 +13,6 @@ public class DescriptionScreenInteractorImpl implements DescriptionScreenInterac
     public DescriptionScreenInteractorImpl(DescriptionScreenView descriptionScreenView) {
         this.descriptionScreenView = descriptionScreenView;
     }
+
+
 }

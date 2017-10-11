@@ -1,7 +1,9 @@
 package usa.bios.animevostorg.ui.viewmodel;
 
+import android.databinding.ObservableArrayList;
 import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
+import android.databinding.ObservableList;
 
 /**
  * Created by Bios on 8/29/2017.
@@ -16,6 +18,7 @@ public class ItemPreviewScreenViewModel {
     public ObservableField<String> contentCount = new ObservableField<>();
     public ObservableField<String> contentDirector = new ObservableField<>();
     public ObservableField<String> contentUrlImagePreview = new ObservableField<>();
+    public ObservableList<String> contentScreenImage = new ObservableArrayList<>();
     public ObservableField<String> contentYear = new ObservableField<>();
     public ObservableField<String> contentGenre = new ObservableField<>();
     public ObservableField<String> contentType = new ObservableField<>();
