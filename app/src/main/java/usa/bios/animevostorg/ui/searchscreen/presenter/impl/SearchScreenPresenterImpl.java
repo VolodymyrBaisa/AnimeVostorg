@@ -1,12 +1,12 @@
-package usa.bios.animevostorg.ui.search.presenter.impl;
+package usa.bios.animevostorg.ui.searchscreen.presenter.impl;
 
 import java.lang.ref.WeakReference;
 
 import io.reactivex.disposables.Disposable;
 import usa.bios.animevostorg.ui.base.BaseView;
-import usa.bios.animevostorg.ui.search.SearchScreenView;
-import usa.bios.animevostorg.ui.search.presenter.SearchScreenInteractor;
-import usa.bios.animevostorg.ui.search.presenter.SearchScreenPresenter;
+import usa.bios.animevostorg.ui.searchscreen.SearchScreenView;
+import usa.bios.animevostorg.ui.searchscreen.presenter.SearchScreenInteractor;
+import usa.bios.animevostorg.ui.searchscreen.presenter.SearchScreenPresenter;
 import usa.bios.animevostorg.utils.NullUtils;
 
 /**

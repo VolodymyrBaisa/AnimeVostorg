@@ -1,4 +1,4 @@
-package usa.bios.animevostorg.ui.search.adapter;
+package usa.bios.animevostorg.ui.searchscreen.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,7 +8,8 @@ import android.view.ViewGroup;
 import usa.bios.animevostorg.R;
 import usa.bios.animevostorg.model.Data;
 import usa.bios.animevostorg.model.DataList;
-import usa.bios.animevostorg.ui.viewmodel.ItemPreviewScreenViewModel;
+import usa.bios.animevostorg.model.RealmString;
+import usa.bios.animevostorg.ui.contentitem.viewmodel.ItemPreviewScreenViewModel;
 import usa.bios.animevostorg.utils.CalcUtils;
 import usa.bios.animevostorg.utils.GsonUtils;
 import usa.bios.animevostorg.utils.NullUtils;
@@ -45,11 +46,11 @@ public class SearchScreenRecyclerAdapter extends RecyclerView.Adapter<SearchScre
             itemPreviewScreenViewModel.contentCount.set(data.getCount());
             itemPreviewScreenViewModel.contentDirector.set(data.getDirector());
             itemPreviewScreenViewModel.contentUrlImagePreview.set(data.getUrlImagePreview());
+            itemPreviewScreenViewModel.contentScreenImage.addAll(data.getScreenImage().subList(0, data.getScreenImage().size()));
             itemPreviewScreenViewModel.contentYear.set(data.getYear());
             itemPreviewScreenViewModel.contentGenre.set(data.getGenre());
             itemPreviewScreenViewModel.contentType.set(data.getType());
             itemPreviewScreenViewModel.contentId.set(data.getId());
-            holder.itemPreviewScreenHandler.setBundleData(data);
         }
     }
 

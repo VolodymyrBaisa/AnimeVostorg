@@ -1,4 +1,4 @@
-package usa.bios.animevostorg.ui.search.presenter;
+package usa.bios.animevostorg.ui.searchscreen.presenter;
 
 import io.reactivex.disposables.Disposable;
 import usa.bios.animevostorg.ui.base.BasePresenter;

@@ -1,4 +1,4 @@
-package usa.bios.animevostorg.ui.search.presenter.impl;
+package usa.bios.animevostorg.ui.searchscreen.presenter.impl;
 
 import android.view.View;
 
@@ -10,8 +10,8 @@ import io.reactivex.schedulers.Schedulers;
 import usa.bios.animevostorg.BuildConfig;
 import usa.bios.animevostorg.R;
 import usa.bios.animevostorg.service.APIService;
-import usa.bios.animevostorg.ui.search.SearchScreenView;
-import usa.bios.animevostorg.ui.search.presenter.SearchScreenInteractor;
+import usa.bios.animevostorg.ui.searchscreen.SearchScreenView;
+import usa.bios.animevostorg.ui.searchscreen.presenter.SearchScreenInteractor;
 
 /**
  * Created by Bios on 9/26/2017.

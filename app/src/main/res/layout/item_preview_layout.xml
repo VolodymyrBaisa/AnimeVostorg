@@ -11,11 +11,11 @@
 
         <variable
             name="handler"
-            type="usa.bios.animevostorg.ui.handler.ItemPreviewScreenHandler" />
+            type="usa.bios.animevostorg.ui.contentitem.handler.ItemPreviewScreenHandler" />
 
         <variable
             name="content"
-            type="usa.bios.animevostorg.ui.viewmodel.ItemPreviewScreenViewModel" />
+            type="usa.bios.animevostorg.ui.contentitem.viewmodel.ItemPreviewScreenViewModel" />
     </data>
 
     <LinearLayout
@@ -28,7 +28,7 @@
             android:id="@+id/itemContentRoot"
             android:layout_width="@dimen/content_screen_card_width"
             android:layout_height="@dimen/content_screen_card_height"
-            android:onClick="@{(v)->handler.onClickCardItem(v)}"
+            android:onClick="@{(v)->handler.onClickCardItem(v, content)}"
             app:cardCornerRadius="@dimen/content_screen_card_corner_radius"
             app:cardElevation="@dimen/content_screen_card_elevation"
             app:cardUseCompatPadding="true">

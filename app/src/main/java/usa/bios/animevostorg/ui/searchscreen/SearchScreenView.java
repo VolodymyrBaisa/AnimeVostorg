@@ -1,4 +1,4 @@
-package usa.bios.animevostorg.ui.search;
+package usa.bios.animevostorg.ui.searchscreen;
 
 import usa.bios.animevostorg.model.DataList;
 import usa.bios.animevostorg.ui.base.BaseView;

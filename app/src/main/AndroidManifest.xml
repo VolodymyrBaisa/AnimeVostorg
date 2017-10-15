@@ -21,7 +21,7 @@
         <activity android:name=".ui.contentscreen.ContentActivity"
             android:windowSoftInputMode="adjustNothing"/>
 
-        <activity android:name=".ui.search.SearchActivity"
+        <activity android:name=".ui.searchscreen.SearchActivity"
             android:windowSoftInputMode="adjustNothing"/>
 
         <activity android:name=".ui.description.DescriptionActivity"/>

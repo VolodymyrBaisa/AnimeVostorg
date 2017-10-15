@@ -9,7 +9,8 @@ import io.realm.RealmResults;
 import usa.bios.animevostorg.R;
 import usa.bios.animevostorg.dao.DataDao;
 import usa.bios.animevostorg.model.Data;
-import usa.bios.animevostorg.ui.viewmodel.ItemPreviewScreenViewModel;
+import usa.bios.animevostorg.model.RealmString;
+import usa.bios.animevostorg.ui.contentitem.viewmodel.ItemPreviewScreenViewModel;
 import usa.bios.animevostorg.utils.CalcUtils;
 import usa.bios.animevostorg.utils.GsonUtils;
 import usa.bios.animevostorg.utils.NullUtils;
@@ -38,24 +39,24 @@ public class ContentScreenRecyclerAdapter extends RecyclerView.Adapter<ContentSc
 
     @Override
     public void onBindViewHolder(ContentScreenViewHolder holder, int position) {
+
         if (NullUtils.isNotNull(dataRealmResults)) {
             Data data = dataRealmResults.get(position);
-            ItemPreviewScreenViewModel itemContentScreenViewModel = holder.itemPreviewScreenViewModel;
+            ItemPreviewScreenViewModel itemPreviewScreenViewModel = holder.itemPreviewScreenViewModel;
 
-            itemContentScreenViewModel.contentRating.set(CalcUtils.calculateRating(data.getRating(), data.getVotes()));
-            itemContentScreenViewModel.contentSeriesTotal.set(ParserUtils.getSeriesTotal(data.getTitle(), SERIES_TOTAL_PATTERN));
-            itemContentScreenViewModel.contentDescription.set(data.getDescription());
-            itemContentScreenViewModel.contentTitle.set(data.getTitle());
-            itemContentScreenViewModel.contentSeries.set(GsonUtils.getElementCount(data.getSeries()));
-            itemContentScreenViewModel.contentCount.set(data.getCount());
-            itemContentScreenViewModel.contentDirector.set(data.getDirector());
-            itemContentScreenViewModel.contentUrlImagePreview.set(data.getUrlImagePreview());
-            itemContentScreenViewModel.contentScreenImage.forEach(image -> data.getScreenImage());
-            itemContentScreenViewModel.contentYear.set(data.getYear());
-            itemContentScreenViewModel.contentGenre.set(data.getGenre());
-            itemContentScreenViewModel.contentType.set(data.getType());
-            itemContentScreenViewModel.contentId.set(data.getId());
-            holder.itemPreviewScreenHandler.setBundleData(data);
+            itemPreviewScreenViewModel.contentRating.set(CalcUtils.calculateRating(data.getRating(), data.getVotes()));
+            itemPreviewScreenViewModel.contentSeriesTotal.set(ParserUtils.getSeriesTotal(data.getTitle(), SERIES_TOTAL_PATTERN));
+            itemPreviewScreenViewModel.contentDescription.set(data.getDescription());
+            itemPreviewScreenViewModel.contentTitle.set(data.getTitle());
+            itemPreviewScreenViewModel.contentSeries.set(GsonUtils.getElementCount(data.getSeries()));
+            itemPreviewScreenViewModel.contentCount.set(data.getCount());
+            itemPreviewScreenViewModel.contentDirector.set(data.getDirector());
+            itemPreviewScreenViewModel.contentUrlImagePreview.set(data.getUrlImagePreview());
+            itemPreviewScreenViewModel.contentScreenImage.addAll(data.getScreenImage().subList(0, data.getScreenImage().size()));
+            itemPreviewScreenViewModel.contentYear.set(data.getYear());
+            itemPreviewScreenViewModel.contentGenre.set(data.getGenre());
+            itemPreviewScreenViewModel.contentType.set(data.getType());
+            itemPreviewScreenViewModel.contentId.set(data.getId());
         }
     }
 

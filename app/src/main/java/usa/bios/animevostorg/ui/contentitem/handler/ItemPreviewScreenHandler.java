@@ -1,16 +1,18 @@
-package usa.bios.animevostorg.ui.handler;
+package usa.bios.animevostorg.ui.contentitem.handler;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.MotionEvent;
 import android.view.View;
 
+import org.parceler.Parcel;
 import org.parceler.Parcels;
 
 import usa.bios.animevostorg.R;
-import usa.bios.animevostorg.model.Data;
 import usa.bios.animevostorg.ui.base.BaseActivity;
+import usa.bios.animevostorg.ui.contentitem.viewmodel.ItemPreviewScreenViewModel;
 import usa.bios.animevostorg.ui.description.DescriptionActivity;
 import usa.bios.animevostorg.utils.NullUtils;
 
@@ -19,20 +21,15 @@ import usa.bios.animevostorg.utils.NullUtils;
  */
 
 public class ItemPreviewScreenHandler {
-    private static final String PAGE_DATA = "page_data";
-    private Bundle bundle;
+    private static final String PAGE_ITEMS = "page_items";
 
     public ItemPreviewScreenHandler() {
-        bundle = new Bundle();
+
     }
 
-    public void setBundleData(Data data) {
-        bundle.putParcelable(PAGE_DATA, Parcels.wrap(Data.class, data));
-    }
-
-    public void onClickCardItem(View view) {
-        BaseActivity baseActivity = (BaseActivity) view.getContext();
-        switchActivityWithAnimation(baseActivity, DescriptionActivity.class);
+    public void onClickCardItem(View view, ItemPreviewScreenViewModel items) {
+        intentActivity(view.getContext(), DescriptionActivity.class, items);
+        callAnimation((BaseActivity) view.getContext());
     }
 
     public View.OnTouchListener onTouchCardItem() {
@@ -42,7 +39,7 @@ public class ItemPreviewScreenHandler {
             private float startY;
 
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public boolean onTouch(View view, MotionEvent event) {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         startX = event.getX();
@@ -52,7 +49,8 @@ public class ItemPreviewScreenHandler {
                         float endX = event.getX();
                         float endY = event.getY();
                         if (isAClick(startX, endX, startY, endY)) {
-                            switchActivityWithAnimation(v.getContext(), DescriptionActivity.class);
+                            //intentActivity(view.getContext(), DescriptionActivity.class);
+                            callAnimation((BaseActivity) view.getContext());
                         }
                         break;
                 }
@@ -67,24 +65,24 @@ public class ItemPreviewScreenHandler {
         };
     }
 
-    private void switchActivityWithAnimation(Context context, Class aClass) {
-        intentActivity(context, aClass);
-        callAnimation((BaseActivity) context);
-
-    }
-
-    private void intentActivity(Context context, Class aClass) {
+    private void intentActivity(Context context, Class aClass, ItemPreviewScreenViewModel items) {
         if (NullUtils.isNotNull(context) && NullUtils.isNotNull(aClass)) {
             Intent intent = new Intent(context, aClass);
-            intent.putExtras(bundle);
+            intent.putExtras(getBundle(items));
             context.startActivity(intent);
         }
+    }
+
+    @NonNull
+    private Bundle getBundle(ItemPreviewScreenViewModel items) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(PAGE_ITEMS, Parcels.wrap(items));
+        return bundle;
     }
 
     private void callAnimation(BaseActivity baseActivity) {
         if (NullUtils.isNotNull(baseActivity)) {
             baseActivity.overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
         }
-
     }
 }

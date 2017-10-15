@@ -19,7 +19,7 @@ import usa.bios.animevostorg.ui.base.BaseActivity;
 import usa.bios.animevostorg.ui.contentscreen.adapter.ContentScreenRecyclerAdapter;
 import usa.bios.animevostorg.ui.contentscreen.presenter.ContentScreenPresenter;
 import usa.bios.animevostorg.ui.contentscreen.presenter.impl.ContentScreenPresenterImpl;
-import usa.bios.animevostorg.ui.search.SearchActivity;
+import usa.bios.animevostorg.ui.searchscreen.SearchActivity;
 import usa.bios.animevostorg.utils.CalcUtils;
 import usa.bios.animevostorg.utils.NullUtils;
 import usa.bios.animevostorg.utils.TypefaceUtils;

@@ -1,4 +1,4 @@
-package usa.bios.animevostorg.ui.adapter;
+package usa.bios.animevostorg.ui;
 
 import android.graphics.Typeface;
 import android.widget.ImageView;
@@ -7,6 +7,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import usa.bios.animevostorg.utils.ImageUtils;
+import usa.bios.animevostorg.utils.NullUtils;
 
 /**
  * Created by Bios on 8/29/2017.
@@ -24,7 +25,7 @@ public class BindingAdapter {
 
     @android.databinding.BindingAdapter({"bind:imageUrl"})
     public static void loadImage(ImageView view, String imageUrl) {
-        if (!imageUrl.contains("http")) {
+        if (NullUtils.isNotNull(imageUrl) && !imageUrl.contains("http")) {
             imageUrl = ENDPOINT.concat(imageUrl);
         }
         ImageUtils.loadImage(view, imageUrl);
@@ -34,7 +35,7 @@ public class BindingAdapter {
     public static void loadImage(ImageView view, List<String> imageUrls, int imageIndex) {
         String url = imageUrls.get(imageIndex);
 
-        if (!url.contains("http")) {
+        if (NullUtils.isNotNull(url) && !url.contains("http")) {
             url = ENDPOINT.concat(url);
         }
         ImageUtils.loadImage(view, url);

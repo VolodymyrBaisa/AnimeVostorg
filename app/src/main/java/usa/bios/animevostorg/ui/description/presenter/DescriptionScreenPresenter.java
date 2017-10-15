@@ -7,5 +7,5 @@ import usa.bios.animevostorg.ui.base.BasePresenter;
  */
 
 public interface DescriptionScreenPresenter extends BasePresenter {
-
+    void loadPage();
 }

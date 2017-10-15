@@ -1,4 +1,4 @@
-package usa.bios.animevostorg.ui.viewmodel;
+package usa.bios.animevostorg.ui.description.viewmodel;
 
 import android.databinding.ObservableField;
 

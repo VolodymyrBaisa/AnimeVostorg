@@ -9,7 +9,7 @@
 
         <variable
             name="content"
-            type="usa.bios.animevostorg.ui.viewmodel.DescriptionScreenViewModel" />
+            type="usa.bios.animevostorg.ui.description.viewmodel.DescriptionScreenViewModel" />
     </data>
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"

@@ -1,4 +1,4 @@
-package usa.bios.animevostorg.ui.search;
+package usa.bios.animevostorg.ui.searchscreen;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,9 +17,9 @@ import usa.bios.animevostorg.model.DataList;
 import usa.bios.animevostorg.ui.base.BaseActivity;
 import usa.bios.animevostorg.ui.custom.search.OnQueryTextListener;
 import usa.bios.animevostorg.ui.custom.search.SearchView;
-import usa.bios.animevostorg.ui.search.adapter.SearchScreenRecyclerAdapter;
-import usa.bios.animevostorg.ui.search.presenter.SearchScreenPresenter;
-import usa.bios.animevostorg.ui.search.presenter.impl.SearchScreenPresenterImpl;
+import usa.bios.animevostorg.ui.searchscreen.adapter.SearchScreenRecyclerAdapter;
+import usa.bios.animevostorg.ui.searchscreen.presenter.SearchScreenPresenter;
+import usa.bios.animevostorg.ui.searchscreen.presenter.impl.SearchScreenPresenterImpl;
 import usa.bios.animevostorg.utils.CalcUtils;
 import usa.bios.animevostorg.utils.NullUtils;
 

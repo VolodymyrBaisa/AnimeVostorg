@@ -26,4 +26,9 @@ public class DescriptionScreenPresenterImpl implements DescriptionScreenPresente
     public void unSubscribe() {
         if (NullUtils.isNotNull(descriptionScreenViewWeakReference)) descriptionScreenViewWeakReference.clear();
     }
+
+    @Override
+    public void loadPage() {
+        descriptionScreenInteractor.fillPage();
+    }
 }

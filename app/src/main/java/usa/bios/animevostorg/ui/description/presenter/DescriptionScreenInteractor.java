@@ -5,4 +5,5 @@ package usa.bios.animevostorg.ui.description.presenter;
  */
 
 public interface DescriptionScreenInteractor {
+    void fillPage();
 }
